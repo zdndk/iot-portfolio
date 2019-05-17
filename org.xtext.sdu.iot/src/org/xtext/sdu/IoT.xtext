@@ -1,0 +1,99 @@
+grammar org.xtext.sdu.IoT with org.eclipse.xtext.common.Terminals
+
+generate ioT "http://www.xtext.org/sdu/IoT"
+
+System:
+	system+=(SensorTypes | Sensor | SensorGroup | SensorGetMethod | DeviceTypes | Device | ServerTypes | Server | DestinationTypes | Destination | FetchData)+
+;
+
+SensorType:
+	name=ID
+;
+
+SensorTypes:
+	'SensorTypes' types+=SensorType (',' types+=SensorType)*
+;
+
+Sensor:
+	'Sensor' name=ID 'of' 'type' type=[SensorType]
+;
+
+SensorGroup:
+	'SensorGroup' name=ID 'include' sensors+=[Sensor] (',' sensors+=[Sensor])*
+;
+
+SensorGetMethod:
+	'SensorGetMethod' method=Method  'for' 'type' type=[SensorType]
+;
+
+Method: 
+	name=ID '(' ((parameters+=ID) (',' parameters+=ID)*)? ')'
+;
+
+DeviceType:
+	name=ID
+;
+
+DeviceTypes:
+	'DeviceTypes' types+=DeviceType (',' types+=DeviceType)*
+;
+
+Device:
+	'Device' name=ID 'of' 'type' type=[DeviceType] 'contains' ('device' devices=[Device] | 'group' devices=[SensorGroup])
+;
+
+ServerType:
+	name=ID
+;
+
+ServerTypes:
+	'ServerTypes' types+=ServerType (',' types+=ServerType)*
+;
+
+Server:
+	'Server' name=ID 'of' 'type' type=[ServerType] 'listens' 'on'  ip=Ip 'and' port=Portnumber
+;
+
+DestinationType:
+	name=ID
+;
+
+DestinationTypes:
+	'DestinationTypes' types+=DestinationType (',' types+=DestinationType)*
+;
+
+Destination:
+	'Destination' name=ID 'of' type=[DestinationType]
+;
+
+FetchData:
+	'Fetch' 'data' 'from' ('type' filter=[SensorType] | 'group' filter=[SensorGroup]) 'for' 'device' device=[Device] 'to' ('destination' destination=[Destination] | 'server' destination=[Server]) (conExp=FetchDataExpression | conExp=FetchDataCondition)?
+;
+
+FetchDataExpression:
+	'every' duration=Time timeUnit=TimeUnit
+;
+
+FetchDataCondition:
+	('when' | 'if') condition=Condition
+;
+
+TimeUnit:
+	('ms' | 's' | 'm' | 'h')
+;
+
+Condition:
+	'_??'	
+;
+
+Ip:
+	{Ip} ip+=INT '.' ip+=INT '.' ip+=INT '.' ip+=INT
+;
+
+Portnumber:
+	{Portnumber} number=INT
+;
+
+Time:
+	time=INT
+;

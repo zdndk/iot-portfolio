@@ -1,0 +1,23 @@
+SensorTypes lightsensor, gyroscope, altimeter
+DestinationTypes dt
+
+Sensor Lightsensor of type lightsensor
+Sensor Gyro of type gyroscope
+Sensor Alt	of type altimeter
+
+SensorGetMethod roll() for type gyroscope
+
+SensorGroup pycomDefaultSensors include Lightsensor, Gyro, Alt
+
+DeviceTypes pycom 
+
+Device PysenseDevice of type pycom contains group pycomDefaultSensors
+Device PysenseDeviceB of type pycom contains group pycomDefaultSensors
+
+ServerTypes CloudVM
+
+Server iotHub of type CloudVM listens on 192.168.87.119 and 8000 
+
+
+Fetch data from type gyroscope for device PysenseDevice to server iotHub every 10 s
+//Fetch data from type lightsensor to destination dt every 10 s
