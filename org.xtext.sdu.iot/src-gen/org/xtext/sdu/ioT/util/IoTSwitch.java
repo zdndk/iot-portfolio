@@ -8,6 +8,9 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.xtext.sdu.ioT.AndCondition;
+import org.xtext.sdu.ioT.ComparisonCondition;
+import org.xtext.sdu.ioT.Condition;
 import org.xtext.sdu.ioT.Destination;
 import org.xtext.sdu.ioT.DestinationType;
 import org.xtext.sdu.ioT.DestinationTypes;
@@ -19,7 +22,10 @@ import org.xtext.sdu.ioT.FetchDataCondition;
 import org.xtext.sdu.ioT.FetchDataExpression;
 import org.xtext.sdu.ioT.IoTPackage;
 import org.xtext.sdu.ioT.Ip;
+import org.xtext.sdu.ioT.LiteralBool;
+import org.xtext.sdu.ioT.LiteralNumber;
 import org.xtext.sdu.ioT.Method;
+import org.xtext.sdu.ioT.OrCondition;
 import org.xtext.sdu.ioT.Portnumber;
 import org.xtext.sdu.ioT.Sensor;
 import org.xtext.sdu.ioT.SensorGetMethod;
@@ -140,6 +146,7 @@ public class IoTSwitch<T> extends Switch<T>
       {
         Method method = (Method)theEObject;
         T result = caseMethod(method);
+        if (result == null) result = caseCondition(method);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -227,6 +234,13 @@ public class IoTSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case IoTPackage.CONDITION:
+      {
+        Condition condition = (Condition)theEObject;
+        T result = caseCondition(condition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case IoTPackage.IP:
       {
         Ip ip = (Ip)theEObject;
@@ -245,6 +259,46 @@ public class IoTSwitch<T> extends Switch<T>
       {
         Time time = (Time)theEObject;
         T result = caseTime(time);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case IoTPackage.OR_CONDITION:
+      {
+        OrCondition orCondition = (OrCondition)theEObject;
+        T result = caseOrCondition(orCondition);
+        if (result == null) result = caseCondition(orCondition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case IoTPackage.AND_CONDITION:
+      {
+        AndCondition andCondition = (AndCondition)theEObject;
+        T result = caseAndCondition(andCondition);
+        if (result == null) result = caseCondition(andCondition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case IoTPackage.COMPARISON_CONDITION:
+      {
+        ComparisonCondition comparisonCondition = (ComparisonCondition)theEObject;
+        T result = caseComparisonCondition(comparisonCondition);
+        if (result == null) result = caseCondition(comparisonCondition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case IoTPackage.LITERAL_BOOL:
+      {
+        LiteralBool literalBool = (LiteralBool)theEObject;
+        T result = caseLiteralBool(literalBool);
+        if (result == null) result = caseCondition(literalBool);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case IoTPackage.LITERAL_NUMBER:
+      {
+        LiteralNumber literalNumber = (LiteralNumber)theEObject;
+        T result = caseLiteralNumber(literalNumber);
+        if (result == null) result = caseCondition(literalNumber);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -557,6 +611,22 @@ public class IoTSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Condition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Condition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCondition(Condition object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Ip</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -600,6 +670,86 @@ public class IoTSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseTime(Time object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Or Condition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Or Condition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOrCondition(OrCondition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>And Condition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>And Condition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAndCondition(AndCondition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Comparison Condition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Comparison Condition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseComparisonCondition(ComparisonCondition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Literal Bool</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Literal Bool</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLiteralBool(LiteralBool object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Literal Number</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Literal Number</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLiteralNumber(LiteralNumber object)
   {
     return null;
   }

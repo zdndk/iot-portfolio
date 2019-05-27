@@ -12,7 +12,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
@@ -33,7 +32,7 @@ import org.xtext.sdu.ioT.Method;
  *
  * @generated
  */
-public class MethodImpl extends MinimalEObjectImpl.Container implements Method
+public class MethodImpl extends ConditionImpl implements Method
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

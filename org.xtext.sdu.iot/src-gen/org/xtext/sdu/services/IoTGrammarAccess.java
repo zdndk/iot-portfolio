@@ -738,21 +738,24 @@ public class IoTGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDestinationAssignment_8_1_1 = (Assignment)cGroup_8_1.eContents().get(1);
 		private final CrossReference cDestinationServerCrossReference_8_1_1_0 = (CrossReference)cDestinationAssignment_8_1_1.eContents().get(0);
 		private final RuleCall cDestinationServerIDTerminalRuleCall_8_1_1_0_1 = (RuleCall)cDestinationServerCrossReference_8_1_1_0.eContents().get(1);
-		private final Alternatives cAlternatives_9 = (Alternatives)cGroup.eContents().get(9);
-		private final Assignment cConExpAssignment_9_0 = (Assignment)cAlternatives_9.eContents().get(0);
-		private final RuleCall cConExpFetchDataExpressionParserRuleCall_9_0_0 = (RuleCall)cConExpAssignment_9_0.eContents().get(0);
-		private final Assignment cConExpAssignment_9_1 = (Assignment)cAlternatives_9.eContents().get(1);
-		private final RuleCall cConExpFetchDataConditionParserRuleCall_9_1_0 = (RuleCall)cConExpAssignment_9_1.eContents().get(0);
+		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
+		private final Keyword cConditionKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
+		private final Assignment cConditionAssignment_9_1 = (Assignment)cGroup_9.eContents().get(1);
+		private final RuleCall cConditionFetchDataConditionParserRuleCall_9_1_0 = (RuleCall)cConditionAssignment_9_1.eContents().get(0);
+		private final Group cGroup_10 = (Group)cGroup.eContents().get(10);
+		private final Keyword cTriggeredKeyword_10_0 = (Keyword)cGroup_10.eContents().get(0);
+		private final Assignment cTriggeredAssignment_10_1 = (Assignment)cGroup_10.eContents().get(1);
+		private final RuleCall cTriggeredFetchDataExpressionParserRuleCall_10_1_0 = (RuleCall)cTriggeredAssignment_10_1.eContents().get(0);
 		
 		//FetchData:
 		//	'Fetch' 'data' 'from' ('type' filter=[SensorType] | 'group' filter=[SensorGroup]) 'for' 'device' device=[Device] 'to'
-		//	('destination' destination=[Destination] | 'server' destination=[Server]) (conExp=FetchDataExpression |
-		//	conExp=FetchDataCondition)?;
+		//	('destination' destination=[Destination] | 'server' destination=[Server]) (=> 'condition'
+		//	condition=FetchDataCondition)? (=> 'triggered' triggered=FetchDataExpression)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Fetch' 'data' 'from' ('type' filter=[SensorType] | 'group' filter=[SensorGroup]) 'for' 'device' device=[Device] 'to'
-		//('destination' destination=[Destination] | 'server' destination=[Server]) (conExp=FetchDataExpression |
-		//conExp=FetchDataCondition)?
+		//('destination' destination=[Destination] | 'server' destination=[Server]) (=> 'condition'
+		//condition=FetchDataCondition)? (=> 'triggered' triggered=FetchDataExpression)?
 		public Group getGroup() { return cGroup; }
 		
 		//'Fetch'
@@ -848,20 +851,29 @@ public class IoTGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getDestinationServerIDTerminalRuleCall_8_1_1_0_1() { return cDestinationServerIDTerminalRuleCall_8_1_1_0_1; }
 		
-		//(conExp=FetchDataExpression | conExp=FetchDataCondition)?
-		public Alternatives getAlternatives_9() { return cAlternatives_9; }
+		//(=> 'condition' condition=FetchDataCondition)?
+		public Group getGroup_9() { return cGroup_9; }
 		
-		//conExp=FetchDataExpression
-		public Assignment getConExpAssignment_9_0() { return cConExpAssignment_9_0; }
+		//=> 'condition'
+		public Keyword getConditionKeyword_9_0() { return cConditionKeyword_9_0; }
 		
-		//FetchDataExpression
-		public RuleCall getConExpFetchDataExpressionParserRuleCall_9_0_0() { return cConExpFetchDataExpressionParserRuleCall_9_0_0; }
-		
-		//conExp=FetchDataCondition
-		public Assignment getConExpAssignment_9_1() { return cConExpAssignment_9_1; }
+		//condition=FetchDataCondition
+		public Assignment getConditionAssignment_9_1() { return cConditionAssignment_9_1; }
 		
 		//FetchDataCondition
-		public RuleCall getConExpFetchDataConditionParserRuleCall_9_1_0() { return cConExpFetchDataConditionParserRuleCall_9_1_0; }
+		public RuleCall getConditionFetchDataConditionParserRuleCall_9_1_0() { return cConditionFetchDataConditionParserRuleCall_9_1_0; }
+		
+		//(=> 'triggered' triggered=FetchDataExpression)?
+		public Group getGroup_10() { return cGroup_10; }
+		
+		//=> 'triggered'
+		public Keyword getTriggeredKeyword_10_0() { return cTriggeredKeyword_10_0; }
+		
+		//triggered=FetchDataExpression
+		public Assignment getTriggeredAssignment_10_1() { return cTriggeredAssignment_10_1; }
+		
+		//FetchDataExpression
+		public RuleCall getTriggeredFetchDataExpressionParserRuleCall_10_1_0() { return cTriggeredFetchDataExpressionParserRuleCall_10_1_0; }
 	}
 	public class FetchDataExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.IoT.FetchDataExpression");
@@ -897,33 +909,53 @@ public class IoTGrammarAccess extends AbstractGrammarElementFinder {
 	public class FetchDataConditionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.IoT.FetchDataCondition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Keyword cWhenKeyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
-		private final Keyword cIfKeyword_0_1 = (Keyword)cAlternatives_0.eContents().get(1);
-		private final Assignment cConditionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cConditionConditionParserRuleCall_1_0 = (RuleCall)cConditionAssignment_1.eContents().get(0);
+		private final Keyword cIfKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cConditionAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cConditionConditionParserRuleCall_1_1_0 = (RuleCall)cConditionAssignment_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cElseKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cElseAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cElseFetchDataConditionParserRuleCall_2_1_0 = (RuleCall)cElseAssignment_2_1.eContents().get(0);
 		
 		//FetchDataCondition:
-		//	('when' | 'if') condition=Condition;
+		//	'if' ('(' condition=Condition ')') (=> 'else' else=FetchDataCondition)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('when' | 'if') condition=Condition
+		//'if' ('(' condition=Condition ')') (=> 'else' else=FetchDataCondition)?
 		public Group getGroup() { return cGroup; }
 		
-		//'when' | 'if'
-		public Alternatives getAlternatives_0() { return cAlternatives_0; }
-		
-		//'when'
-		public Keyword getWhenKeyword_0_0() { return cWhenKeyword_0_0; }
-		
 		//'if'
-		public Keyword getIfKeyword_0_1() { return cIfKeyword_0_1; }
+		public Keyword getIfKeyword_0() { return cIfKeyword_0; }
+		
+		//'(' condition=Condition ')'
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_1_0() { return cLeftParenthesisKeyword_1_0; }
 		
 		//condition=Condition
-		public Assignment getConditionAssignment_1() { return cConditionAssignment_1; }
+		public Assignment getConditionAssignment_1_1() { return cConditionAssignment_1_1; }
 		
 		//Condition
-		public RuleCall getConditionConditionParserRuleCall_1_0() { return cConditionConditionParserRuleCall_1_0; }
+		public RuleCall getConditionConditionParserRuleCall_1_1_0() { return cConditionConditionParserRuleCall_1_1_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
+		
+		//(=> 'else' else=FetchDataCondition)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//=> 'else'
+		public Keyword getElseKeyword_2_0() { return cElseKeyword_2_0; }
+		
+		//else=FetchDataCondition
+		public Assignment getElseAssignment_2_1() { return cElseAssignment_2_1; }
+		
+		//FetchDataCondition
+		public RuleCall getElseFetchDataConditionParserRuleCall_2_1_0() { return cElseFetchDataConditionParserRuleCall_2_1_0; }
 	}
 	public class TimeUnitElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.IoT.TimeUnit");
@@ -954,14 +986,260 @@ public class IoTGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class ConditionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.IoT.Condition");
-		private final Keyword c_Keyword = (Keyword)rule.eContents().get(1);
+		private final RuleCall cOrConditionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Condition:
-		//	'_??';
+		//	OrCondition;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'_??'
-		public Keyword get_Keyword() { return c_Keyword; }
+		//OrCondition
+		public RuleCall getOrConditionParserRuleCall() { return cOrConditionParserRuleCall; }
+	}
+	public class OrConditionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.IoT.OrCondition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cAndConditionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cOrConditionLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cVerticalLineVerticalLineKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightAndConditionParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
+		
+		//OrCondition Condition:
+		//	AndCondition ({OrCondition.left=current} "||" right=AndCondition)*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//AndCondition ({OrCondition.left=current} "||" right=AndCondition)*
+		public Group getGroup() { return cGroup; }
+		
+		//AndCondition
+		public RuleCall getAndConditionParserRuleCall_0() { return cAndConditionParserRuleCall_0; }
+		
+		//({OrCondition.left=current} "||" right=AndCondition)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{OrCondition.left=current}
+		public Action getOrConditionLeftAction_1_0() { return cOrConditionLeftAction_1_0; }
+		
+		//"||"
+		public Keyword getVerticalLineVerticalLineKeyword_1_1() { return cVerticalLineVerticalLineKeyword_1_1; }
+		
+		//right=AndCondition
+		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
+		
+		//AndCondition
+		public RuleCall getRightAndConditionParserRuleCall_1_2_0() { return cRightAndConditionParserRuleCall_1_2_0; }
+	}
+	public class AndConditionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.IoT.AndCondition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cComparisonConditionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cAndConditionLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cAmpersandAmpersandKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightComparisonConditionParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
+		
+		//AndCondition Condition:
+		//	ComparisonCondition ({AndCondition.left=current} "&&" right=ComparisonCondition)*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ComparisonCondition ({AndCondition.left=current} "&&" right=ComparisonCondition)*
+		public Group getGroup() { return cGroup; }
+		
+		//ComparisonCondition
+		public RuleCall getComparisonConditionParserRuleCall_0() { return cComparisonConditionParserRuleCall_0; }
+		
+		//({AndCondition.left=current} "&&" right=ComparisonCondition)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{AndCondition.left=current}
+		public Action getAndConditionLeftAction_1_0() { return cAndConditionLeftAction_1_0; }
+		
+		//"&&"
+		public Keyword getAmpersandAmpersandKeyword_1_1() { return cAmpersandAmpersandKeyword_1_1; }
+		
+		//right=ComparisonCondition
+		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
+		
+		//ComparisonCondition
+		public RuleCall getRightComparisonConditionParserRuleCall_1_2_0() { return cRightComparisonConditionParserRuleCall_1_2_0; }
+	}
+	public class ComparisonConditionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.IoT.ComparisonCondition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cPrimaryConditionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cComparisonConditionLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Alternatives cOperatorAlternatives_1_1_0 = (Alternatives)cOperatorAssignment_1_1.eContents().get(0);
+		private final Keyword cOperatorLessThanSignKeyword_1_1_0_0 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(0);
+		private final Keyword cOperatorLessThanSignEqualsSignKeyword_1_1_0_1 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(1);
+		private final Keyword cOperatorEqualsSignEqualsSignKeyword_1_1_0_2 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(2);
+		private final Keyword cOperatorGreaterThanSignEqualsSignKeyword_1_1_0_3 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(3);
+		private final Keyword cOperatorGreaterThanSignKeyword_1_1_0_4 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(4);
+		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightPrimaryConditionParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
+		
+		//ComparisonCondition Condition:
+		//	PrimaryCondition ({ComparisonCondition.left=current} operator=("<" | "<=" | "==" | ">=" | ">")
+		//	right=PrimaryCondition)*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//PrimaryCondition ({ComparisonCondition.left=current} operator=("<" | "<=" | "==" | ">=" | ">") right=PrimaryCondition)*
+		public Group getGroup() { return cGroup; }
+		
+		//PrimaryCondition
+		public RuleCall getPrimaryConditionParserRuleCall_0() { return cPrimaryConditionParserRuleCall_0; }
+		
+		//({ComparisonCondition.left=current} operator=("<" | "<=" | "==" | ">=" | ">") right=PrimaryCondition)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{ComparisonCondition.left=current}
+		public Action getComparisonConditionLeftAction_1_0() { return cComparisonConditionLeftAction_1_0; }
+		
+		//operator=("<" | "<=" | "==" | ">=" | ">")
+		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
+		
+		//("<" | "<=" | "==" | ">=" | ">")
+		public Alternatives getOperatorAlternatives_1_1_0() { return cOperatorAlternatives_1_1_0; }
+		
+		//"<"
+		public Keyword getOperatorLessThanSignKeyword_1_1_0_0() { return cOperatorLessThanSignKeyword_1_1_0_0; }
+		
+		//"<="
+		public Keyword getOperatorLessThanSignEqualsSignKeyword_1_1_0_1() { return cOperatorLessThanSignEqualsSignKeyword_1_1_0_1; }
+		
+		//"=="
+		public Keyword getOperatorEqualsSignEqualsSignKeyword_1_1_0_2() { return cOperatorEqualsSignEqualsSignKeyword_1_1_0_2; }
+		
+		//">="
+		public Keyword getOperatorGreaterThanSignEqualsSignKeyword_1_1_0_3() { return cOperatorGreaterThanSignEqualsSignKeyword_1_1_0_3; }
+		
+		//">"
+		public Keyword getOperatorGreaterThanSignKeyword_1_1_0_4() { return cOperatorGreaterThanSignKeyword_1_1_0_4; }
+		
+		//right=PrimaryCondition
+		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
+		
+		//PrimaryCondition
+		public RuleCall getRightPrimaryConditionParserRuleCall_1_2_0() { return cRightPrimaryConditionParserRuleCall_1_2_0; }
+	}
+	public class PrimaryConditionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.IoT.PrimaryCondition");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final RuleCall cConditionParserRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
+		private final RuleCall cLiteralBooleanParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cLiteralIntegerParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cLiteralMethodParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		
+		//PrimaryCondition Condition:
+		//	"(" Condition ")" | LiteralBoolean | LiteralInteger | LiteralMethod;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"(" Condition ")" | LiteralBoolean | LiteralInteger | LiteralMethod
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//"(" Condition ")"
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//"("
+		public Keyword getLeftParenthesisKeyword_0_0() { return cLeftParenthesisKeyword_0_0; }
+		
+		//Condition
+		public RuleCall getConditionParserRuleCall_0_1() { return cConditionParserRuleCall_0_1; }
+		
+		//")"
+		public Keyword getRightParenthesisKeyword_0_2() { return cRightParenthesisKeyword_0_2; }
+		
+		//LiteralBoolean
+		public RuleCall getLiteralBooleanParserRuleCall_1() { return cLiteralBooleanParserRuleCall_1; }
+		
+		//LiteralInteger
+		public RuleCall getLiteralIntegerParserRuleCall_2() { return cLiteralIntegerParserRuleCall_2; }
+		
+		//LiteralMethod
+		public RuleCall getLiteralMethodParserRuleCall_3() { return cLiteralMethodParserRuleCall_3; }
+	}
+	public class LiteralBooleanElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.IoT.LiteralBoolean");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cLiteralBoolAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Assignment cValueAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final Keyword cValueTrueKeyword_0_1_0 = (Keyword)cValueAssignment_0_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Action cLiteralBoolAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cValueAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Keyword cValueFalseKeyword_1_1_0 = (Keyword)cValueAssignment_1_1.eContents().get(0);
+		
+		//LiteralBoolean Condition:
+		//	{LiteralBool} value="true" | {LiteralBool} value="false";
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{LiteralBool} value="true" | {LiteralBool} value="false"
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//{LiteralBool} value="true"
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//{LiteralBool}
+		public Action getLiteralBoolAction_0_0() { return cLiteralBoolAction_0_0; }
+		
+		//value="true"
+		public Assignment getValueAssignment_0_1() { return cValueAssignment_0_1; }
+		
+		//"true"
+		public Keyword getValueTrueKeyword_0_1_0() { return cValueTrueKeyword_0_1_0; }
+		
+		//{LiteralBool} value="false"
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{LiteralBool}
+		public Action getLiteralBoolAction_1_0() { return cLiteralBoolAction_1_0; }
+		
+		//value="false"
+		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
+		
+		//"false"
+		public Keyword getValueFalseKeyword_1_1_0() { return cValueFalseKeyword_1_1_0; }
+	}
+	public class LiteralMethodElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.IoT.LiteralMethod");
+		private final RuleCall cMethodParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//LiteralMethod Condition:
+		//	Method;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Method
+		public RuleCall getMethodParserRuleCall() { return cMethodParserRuleCall; }
+	}
+	public class LiteralIntegerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.IoT.LiteralInteger");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cLiteralNumberAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValueINTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		
+		//LiteralInteger Condition:
+		//	{LiteralNumber} value=INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{LiteralNumber} value=INT
+		public Group getGroup() { return cGroup; }
+		
+		//{LiteralNumber}
+		public Action getLiteralNumberAction_0() { return cLiteralNumberAction_0; }
+		
+		//value=INT
+		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+		
+		//INT
+		public RuleCall getValueINTTerminalRuleCall_1_0() { return cValueINTTerminalRuleCall_1_0; }
 	}
 	public class IpElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.IoT.Ip");
@@ -1083,6 +1361,13 @@ public class IoTGrammarAccess extends AbstractGrammarElementFinder {
 	private final FetchDataConditionElements pFetchDataCondition;
 	private final TimeUnitElements pTimeUnit;
 	private final ConditionElements pCondition;
+	private final OrConditionElements pOrCondition;
+	private final AndConditionElements pAndCondition;
+	private final ComparisonConditionElements pComparisonCondition;
+	private final PrimaryConditionElements pPrimaryCondition;
+	private final LiteralBooleanElements pLiteralBoolean;
+	private final LiteralMethodElements pLiteralMethod;
+	private final LiteralIntegerElements pLiteralInteger;
 	private final IpElements pIp;
 	private final PortnumberElements pPortnumber;
 	private final TimeElements pTime;
@@ -1117,6 +1402,13 @@ public class IoTGrammarAccess extends AbstractGrammarElementFinder {
 		this.pFetchDataCondition = new FetchDataConditionElements();
 		this.pTimeUnit = new TimeUnitElements();
 		this.pCondition = new ConditionElements();
+		this.pOrCondition = new OrConditionElements();
+		this.pAndCondition = new AndConditionElements();
+		this.pComparisonCondition = new ComparisonConditionElements();
+		this.pPrimaryCondition = new PrimaryConditionElements();
+		this.pLiteralBoolean = new LiteralBooleanElements();
+		this.pLiteralMethod = new LiteralMethodElements();
+		this.pLiteralInteger = new LiteralIntegerElements();
 		this.pIp = new IpElements();
 		this.pPortnumber = new PortnumberElements();
 		this.pTime = new TimeElements();
@@ -1313,8 +1605,8 @@ public class IoTGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//FetchData:
 	//	'Fetch' 'data' 'from' ('type' filter=[SensorType] | 'group' filter=[SensorGroup]) 'for' 'device' device=[Device] 'to'
-	//	('destination' destination=[Destination] | 'server' destination=[Server]) (conExp=FetchDataExpression |
-	//	conExp=FetchDataCondition)?;
+	//	('destination' destination=[Destination] | 'server' destination=[Server]) (=> 'condition'
+	//	condition=FetchDataCondition)? (=> 'triggered' triggered=FetchDataExpression)?;
 	public FetchDataElements getFetchDataAccess() {
 		return pFetchData;
 	}
@@ -1334,7 +1626,7 @@ public class IoTGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//FetchDataCondition:
-	//	('when' | 'if') condition=Condition;
+	//	'if' ('(' condition=Condition ')') (=> 'else' else=FetchDataCondition)?;
 	public FetchDataConditionElements getFetchDataConditionAccess() {
 		return pFetchDataCondition;
 	}
@@ -1354,13 +1646,84 @@ public class IoTGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Condition:
-	//	'_??';
+	//	OrCondition;
 	public ConditionElements getConditionAccess() {
 		return pCondition;
 	}
 	
 	public ParserRule getConditionRule() {
 		return getConditionAccess().getRule();
+	}
+	
+	//OrCondition Condition:
+	//	AndCondition ({OrCondition.left=current} "||" right=AndCondition)*;
+	public OrConditionElements getOrConditionAccess() {
+		return pOrCondition;
+	}
+	
+	public ParserRule getOrConditionRule() {
+		return getOrConditionAccess().getRule();
+	}
+	
+	//AndCondition Condition:
+	//	ComparisonCondition ({AndCondition.left=current} "&&" right=ComparisonCondition)*;
+	public AndConditionElements getAndConditionAccess() {
+		return pAndCondition;
+	}
+	
+	public ParserRule getAndConditionRule() {
+		return getAndConditionAccess().getRule();
+	}
+	
+	//ComparisonCondition Condition:
+	//	PrimaryCondition ({ComparisonCondition.left=current} operator=("<" | "<=" | "==" | ">=" | ">")
+	//	right=PrimaryCondition)*;
+	public ComparisonConditionElements getComparisonConditionAccess() {
+		return pComparisonCondition;
+	}
+	
+	public ParserRule getComparisonConditionRule() {
+		return getComparisonConditionAccess().getRule();
+	}
+	
+	//PrimaryCondition Condition:
+	//	"(" Condition ")" | LiteralBoolean | LiteralInteger | LiteralMethod;
+	public PrimaryConditionElements getPrimaryConditionAccess() {
+		return pPrimaryCondition;
+	}
+	
+	public ParserRule getPrimaryConditionRule() {
+		return getPrimaryConditionAccess().getRule();
+	}
+	
+	//LiteralBoolean Condition:
+	//	{LiteralBool} value="true" | {LiteralBool} value="false";
+	public LiteralBooleanElements getLiteralBooleanAccess() {
+		return pLiteralBoolean;
+	}
+	
+	public ParserRule getLiteralBooleanRule() {
+		return getLiteralBooleanAccess().getRule();
+	}
+	
+	//LiteralMethod Condition:
+	//	Method;
+	public LiteralMethodElements getLiteralMethodAccess() {
+		return pLiteralMethod;
+	}
+	
+	public ParserRule getLiteralMethodRule() {
+		return getLiteralMethodAccess().getRule();
+	}
+	
+	//LiteralInteger Condition:
+	//	{LiteralNumber} value=INT;
+	public LiteralIntegerElements getLiteralIntegerAccess() {
+		return pLiteralInteger;
+	}
+	
+	public ParserRule getLiteralIntegerRule() {
+		return getLiteralIntegerAccess().getRule();
 	}
 	
 	//Ip:

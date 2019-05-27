@@ -10,7 +10,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
@@ -21,12 +20,14 @@ import org.xtext.sdu.services.IoTGrammarAccess;
 public class IoTSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected IoTGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_FetchDataCondition_IfKeyword_0_1_or_WhenKeyword_0_0;
+	protected AbstractElementAlias match_PrimaryCondition_LeftParenthesisKeyword_0_0_a;
+	protected AbstractElementAlias match_PrimaryCondition_LeftParenthesisKeyword_0_0_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (IoTGrammarAccess) access;
-		match_FetchDataCondition_IfKeyword_0_1_or_WhenKeyword_0_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getFetchDataConditionAccess().getIfKeyword_0_1()), new TokenAlias(false, false, grammarAccess.getFetchDataConditionAccess().getWhenKeyword_0_0()));
+		match_PrimaryCondition_LeftParenthesisKeyword_0_0_a = new TokenAlias(true, true, grammarAccess.getPrimaryConditionAccess().getLeftParenthesisKeyword_0_0());
+		match_PrimaryCondition_LeftParenthesisKeyword_0_0_p = new TokenAlias(true, false, grammarAccess.getPrimaryConditionAccess().getLeftParenthesisKeyword_0_0());
 	}
 	
 	@Override
@@ -41,20 +42,41 @@ public class IoTSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_FetchDataCondition_IfKeyword_0_1_or_WhenKeyword_0_0.equals(syntax))
-				emit_FetchDataCondition_IfKeyword_0_1_or_WhenKeyword_0_0(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_PrimaryCondition_LeftParenthesisKeyword_0_0_a.equals(syntax))
+				emit_PrimaryCondition_LeftParenthesisKeyword_0_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_PrimaryCondition_LeftParenthesisKeyword_0_0_p.equals(syntax))
+				emit_PrimaryCondition_LeftParenthesisKeyword_0_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
 	/**
 	 * Ambiguous syntax:
-	 *     'when' | 'if'
+	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) condition=Condition
+	 *     (rule start) (ambiguity) name=ID
+	 *     (rule start) (ambiguity) value='false'
+	 *     (rule start) (ambiguity) value='true'
+	 *     (rule start) (ambiguity) value=INT
+	 *     (rule start) (ambiguity) {AndCondition.left=}
+	 *     (rule start) (ambiguity) {ComparisonCondition.left=}
+	 *     (rule start) (ambiguity) {OrCondition.left=}
 	 */
-	protected void emit_FetchDataCondition_IfKeyword_0_1_or_WhenKeyword_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_PrimaryCondition_LeftParenthesisKeyword_0_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     '('+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) {AndCondition.left=}
+	 *     (rule start) (ambiguity) {ComparisonCondition.left=}
+	 *     (rule start) (ambiguity) {OrCondition.left=}
+	 */
+	protected void emit_PrimaryCondition_LeftParenthesisKeyword_0_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

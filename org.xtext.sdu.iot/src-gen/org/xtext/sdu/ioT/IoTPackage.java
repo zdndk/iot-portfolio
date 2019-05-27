@@ -253,6 +253,25 @@ public interface IoTPackage extends EPackage
   int SENSOR_GET_METHOD_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.xtext.sdu.ioT.impl.ConditionImpl <em>Condition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.ioT.impl.ConditionImpl
+   * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getCondition()
+   * @generated
+   */
+  int CONDITION = 19;
+
+  /**
+   * The number of structural features of the '<em>Condition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITION_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.xtext.sdu.ioT.impl.MethodImpl <em>Method</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -269,7 +288,7 @@ public interface IoTPackage extends EPackage
    * @generated
    * @ordered
    */
-  int METHOD__NAME = 0;
+  int METHOD__NAME = CONDITION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Parameters</b></em>' attribute list.
@@ -278,7 +297,7 @@ public interface IoTPackage extends EPackage
    * @generated
    * @ordered
    */
-  int METHOD__PARAMETERS = 1;
+  int METHOD__PARAMETERS = CONDITION_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Method</em>' class.
@@ -287,7 +306,7 @@ public interface IoTPackage extends EPackage
    * @generated
    * @ordered
    */
-  int METHOD_FEATURE_COUNT = 2;
+  int METHOD_FEATURE_COUNT = CONDITION_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.xtext.sdu.ioT.impl.DeviceTypeImpl <em>Device Type</em>}' class.
@@ -633,13 +652,22 @@ public interface IoTPackage extends EPackage
   int FETCH_DATA__DESTINATION = 2;
 
   /**
-   * The feature id for the '<em><b>Con Exp</b></em>' containment reference.
+   * The feature id for the '<em><b>Condition</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FETCH_DATA__CON_EXP = 3;
+  int FETCH_DATA__CONDITION = 3;
+
+  /**
+   * The feature id for the '<em><b>Triggered</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FETCH_DATA__TRIGGERED = 4;
 
   /**
    * The number of structural features of the '<em>Fetch Data</em>' class.
@@ -648,7 +676,7 @@ public interface IoTPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FETCH_DATA_FEATURE_COUNT = 4;
+  int FETCH_DATA_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.xtext.sdu.ioT.impl.FetchDataExpressionImpl <em>Fetch Data Expression</em>}' class.
@@ -698,7 +726,7 @@ public interface IoTPackage extends EPackage
   int FETCH_DATA_CONDITION = 18;
 
   /**
-   * The feature id for the '<em><b>Condition</b></em>' attribute.
+   * The feature id for the '<em><b>Condition</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -707,13 +735,22 @@ public interface IoTPackage extends EPackage
   int FETCH_DATA_CONDITION__CONDITION = 0;
 
   /**
+   * The feature id for the '<em><b>Else</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FETCH_DATA_CONDITION__ELSE = 1;
+
+  /**
    * The number of structural features of the '<em>Fetch Data Condition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FETCH_DATA_CONDITION_FEATURE_COUNT = 1;
+  int FETCH_DATA_CONDITION_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.xtext.sdu.ioT.impl.IpImpl <em>Ip</em>}' class.
@@ -723,7 +760,7 @@ public interface IoTPackage extends EPackage
    * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getIp()
    * @generated
    */
-  int IP = 19;
+  int IP = 20;
 
   /**
    * The feature id for the '<em><b>Ip</b></em>' attribute list.
@@ -751,7 +788,7 @@ public interface IoTPackage extends EPackage
    * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getPortnumber()
    * @generated
    */
-  int PORTNUMBER = 20;
+  int PORTNUMBER = 21;
 
   /**
    * The feature id for the '<em><b>Number</b></em>' attribute.
@@ -779,7 +816,7 @@ public interface IoTPackage extends EPackage
    * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getTime()
    * @generated
    */
-  int TIME = 21;
+  int TIME = 22;
 
   /**
    * The feature id for the '<em><b>Time</b></em>' attribute.
@@ -798,6 +835,182 @@ public interface IoTPackage extends EPackage
    * @ordered
    */
   int TIME_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.ioT.impl.OrConditionImpl <em>Or Condition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.ioT.impl.OrConditionImpl
+   * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getOrCondition()
+   * @generated
+   */
+  int OR_CONDITION = 23;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OR_CONDITION__LEFT = CONDITION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OR_CONDITION__RIGHT = CONDITION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Or Condition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OR_CONDITION_FEATURE_COUNT = CONDITION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.ioT.impl.AndConditionImpl <em>And Condition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.ioT.impl.AndConditionImpl
+   * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getAndCondition()
+   * @generated
+   */
+  int AND_CONDITION = 24;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND_CONDITION__LEFT = CONDITION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND_CONDITION__RIGHT = CONDITION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>And Condition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND_CONDITION_FEATURE_COUNT = CONDITION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.ioT.impl.ComparisonConditionImpl <em>Comparison Condition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.ioT.impl.ComparisonConditionImpl
+   * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getComparisonCondition()
+   * @generated
+   */
+  int COMPARISON_CONDITION = 25;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARISON_CONDITION__LEFT = CONDITION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Operator</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARISON_CONDITION__OPERATOR = CONDITION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARISON_CONDITION__RIGHT = CONDITION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Comparison Condition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARISON_CONDITION_FEATURE_COUNT = CONDITION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.ioT.impl.LiteralBoolImpl <em>Literal Bool</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.ioT.impl.LiteralBoolImpl
+   * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getLiteralBool()
+   * @generated
+   */
+  int LITERAL_BOOL = 26;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL_BOOL__VALUE = CONDITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Literal Bool</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL_BOOL_FEATURE_COUNT = CONDITION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.ioT.impl.LiteralNumberImpl <em>Literal Number</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.ioT.impl.LiteralNumberImpl
+   * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getLiteralNumber()
+   * @generated
+   */
+  int LITERAL_NUMBER = 27;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL_NUMBER__VALUE = CONDITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Literal Number</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL_NUMBER_FEATURE_COUNT = CONDITION_FEATURE_COUNT + 1;
 
 
   /**
@@ -1290,15 +1503,26 @@ public interface IoTPackage extends EPackage
   EReference getFetchData_Destination();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.sdu.ioT.FetchData#getConExp <em>Con Exp</em>}'.
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.ioT.FetchData#getCondition <em>Condition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Con Exp</em>'.
-   * @see org.xtext.sdu.ioT.FetchData#getConExp()
+   * @return the meta object for the containment reference '<em>Condition</em>'.
+   * @see org.xtext.sdu.ioT.FetchData#getCondition()
    * @see #getFetchData()
    * @generated
    */
-  EReference getFetchData_ConExp();
+  EReference getFetchData_Condition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.ioT.FetchData#getTriggered <em>Triggered</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Triggered</em>'.
+   * @see org.xtext.sdu.ioT.FetchData#getTriggered()
+   * @see #getFetchData()
+   * @generated
+   */
+  EReference getFetchData_Triggered();
 
   /**
    * Returns the meta object for class '{@link org.xtext.sdu.ioT.FetchDataExpression <em>Fetch Data Expression</em>}'.
@@ -1343,15 +1567,36 @@ public interface IoTPackage extends EPackage
   EClass getFetchDataCondition();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.sdu.ioT.FetchDataCondition#getCondition <em>Condition</em>}'.
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.ioT.FetchDataCondition#getCondition <em>Condition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Condition</em>'.
+   * @return the meta object for the containment reference '<em>Condition</em>'.
    * @see org.xtext.sdu.ioT.FetchDataCondition#getCondition()
    * @see #getFetchDataCondition()
    * @generated
    */
-  EAttribute getFetchDataCondition_Condition();
+  EReference getFetchDataCondition_Condition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.ioT.FetchDataCondition#getElse <em>Else</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Else</em>'.
+   * @see org.xtext.sdu.ioT.FetchDataCondition#getElse()
+   * @see #getFetchDataCondition()
+   * @generated
+   */
+  EReference getFetchDataCondition_Else();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.ioT.Condition <em>Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Condition</em>'.
+   * @see org.xtext.sdu.ioT.Condition
+   * @generated
+   */
+  EClass getCondition();
 
   /**
    * Returns the meta object for class '{@link org.xtext.sdu.ioT.Ip <em>Ip</em>}'.
@@ -1415,6 +1660,155 @@ public interface IoTPackage extends EPackage
    * @generated
    */
   EAttribute getTime_Time();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.ioT.OrCondition <em>Or Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Or Condition</em>'.
+   * @see org.xtext.sdu.ioT.OrCondition
+   * @generated
+   */
+  EClass getOrCondition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.ioT.OrCondition#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.sdu.ioT.OrCondition#getLeft()
+   * @see #getOrCondition()
+   * @generated
+   */
+  EReference getOrCondition_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.ioT.OrCondition#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.sdu.ioT.OrCondition#getRight()
+   * @see #getOrCondition()
+   * @generated
+   */
+  EReference getOrCondition_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.ioT.AndCondition <em>And Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>And Condition</em>'.
+   * @see org.xtext.sdu.ioT.AndCondition
+   * @generated
+   */
+  EClass getAndCondition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.ioT.AndCondition#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.sdu.ioT.AndCondition#getLeft()
+   * @see #getAndCondition()
+   * @generated
+   */
+  EReference getAndCondition_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.ioT.AndCondition#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.sdu.ioT.AndCondition#getRight()
+   * @see #getAndCondition()
+   * @generated
+   */
+  EReference getAndCondition_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.ioT.ComparisonCondition <em>Comparison Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Comparison Condition</em>'.
+   * @see org.xtext.sdu.ioT.ComparisonCondition
+   * @generated
+   */
+  EClass getComparisonCondition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.ioT.ComparisonCondition#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.sdu.ioT.ComparisonCondition#getLeft()
+   * @see #getComparisonCondition()
+   * @generated
+   */
+  EReference getComparisonCondition_Left();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.ioT.ComparisonCondition#getOperator <em>Operator</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Operator</em>'.
+   * @see org.xtext.sdu.ioT.ComparisonCondition#getOperator()
+   * @see #getComparisonCondition()
+   * @generated
+   */
+  EAttribute getComparisonCondition_Operator();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.ioT.ComparisonCondition#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.sdu.ioT.ComparisonCondition#getRight()
+   * @see #getComparisonCondition()
+   * @generated
+   */
+  EReference getComparisonCondition_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.ioT.LiteralBool <em>Literal Bool</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Literal Bool</em>'.
+   * @see org.xtext.sdu.ioT.LiteralBool
+   * @generated
+   */
+  EClass getLiteralBool();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.ioT.LiteralBool#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.xtext.sdu.ioT.LiteralBool#getValue()
+   * @see #getLiteralBool()
+   * @generated
+   */
+  EAttribute getLiteralBool_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.ioT.LiteralNumber <em>Literal Number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Literal Number</em>'.
+   * @see org.xtext.sdu.ioT.LiteralNumber
+   * @generated
+   */
+  EClass getLiteralNumber();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.ioT.LiteralNumber#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.xtext.sdu.ioT.LiteralNumber#getValue()
+   * @see #getLiteralNumber()
+   * @generated
+   */
+  EAttribute getLiteralNumber_Value();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1842,12 +2236,20 @@ public interface IoTPackage extends EPackage
     EReference FETCH_DATA__DESTINATION = eINSTANCE.getFetchData_Destination();
 
     /**
-     * The meta object literal for the '<em><b>Con Exp</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FETCH_DATA__CON_EXP = eINSTANCE.getFetchData_ConExp();
+    EReference FETCH_DATA__CONDITION = eINSTANCE.getFetchData_Condition();
+
+    /**
+     * The meta object literal for the '<em><b>Triggered</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FETCH_DATA__TRIGGERED = eINSTANCE.getFetchData_Triggered();
 
     /**
      * The meta object literal for the '{@link org.xtext.sdu.ioT.impl.FetchDataExpressionImpl <em>Fetch Data Expression</em>}' class.
@@ -1886,12 +2288,30 @@ public interface IoTPackage extends EPackage
     EClass FETCH_DATA_CONDITION = eINSTANCE.getFetchDataCondition();
 
     /**
-     * The meta object literal for the '<em><b>Condition</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute FETCH_DATA_CONDITION__CONDITION = eINSTANCE.getFetchDataCondition_Condition();
+    EReference FETCH_DATA_CONDITION__CONDITION = eINSTANCE.getFetchDataCondition_Condition();
+
+    /**
+     * The meta object literal for the '<em><b>Else</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FETCH_DATA_CONDITION__ELSE = eINSTANCE.getFetchDataCondition_Else();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.ioT.impl.ConditionImpl <em>Condition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.ioT.impl.ConditionImpl
+     * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getCondition()
+     * @generated
+     */
+    EClass CONDITION = eINSTANCE.getCondition();
 
     /**
      * The meta object literal for the '{@link org.xtext.sdu.ioT.impl.IpImpl <em>Ip</em>}' class.
@@ -1946,6 +2366,128 @@ public interface IoTPackage extends EPackage
      * @generated
      */
     EAttribute TIME__TIME = eINSTANCE.getTime_Time();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.ioT.impl.OrConditionImpl <em>Or Condition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.ioT.impl.OrConditionImpl
+     * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getOrCondition()
+     * @generated
+     */
+    EClass OR_CONDITION = eINSTANCE.getOrCondition();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OR_CONDITION__LEFT = eINSTANCE.getOrCondition_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OR_CONDITION__RIGHT = eINSTANCE.getOrCondition_Right();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.ioT.impl.AndConditionImpl <em>And Condition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.ioT.impl.AndConditionImpl
+     * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getAndCondition()
+     * @generated
+     */
+    EClass AND_CONDITION = eINSTANCE.getAndCondition();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference AND_CONDITION__LEFT = eINSTANCE.getAndCondition_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference AND_CONDITION__RIGHT = eINSTANCE.getAndCondition_Right();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.ioT.impl.ComparisonConditionImpl <em>Comparison Condition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.ioT.impl.ComparisonConditionImpl
+     * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getComparisonCondition()
+     * @generated
+     */
+    EClass COMPARISON_CONDITION = eINSTANCE.getComparisonCondition();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COMPARISON_CONDITION__LEFT = eINSTANCE.getComparisonCondition_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute COMPARISON_CONDITION__OPERATOR = eINSTANCE.getComparisonCondition_Operator();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COMPARISON_CONDITION__RIGHT = eINSTANCE.getComparisonCondition_Right();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.ioT.impl.LiteralBoolImpl <em>Literal Bool</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.ioT.impl.LiteralBoolImpl
+     * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getLiteralBool()
+     * @generated
+     */
+    EClass LITERAL_BOOL = eINSTANCE.getLiteralBool();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LITERAL_BOOL__VALUE = eINSTANCE.getLiteralBool_Value();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.ioT.impl.LiteralNumberImpl <em>Literal Number</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.ioT.impl.LiteralNumberImpl
+     * @see org.xtext.sdu.ioT.impl.IoTPackageImpl#getLiteralNumber()
+     * @generated
+     */
+    EClass LITERAL_NUMBER = eINSTANCE.getLiteralNumber();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LITERAL_NUMBER__VALUE = eINSTANCE.getLiteralNumber_Value();
 
   }
 

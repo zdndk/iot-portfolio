@@ -4,12 +4,15 @@
 package org.xtext.sdu.ioT.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.xtext.sdu.ioT.Condition;
 import org.xtext.sdu.ioT.FetchDataCondition;
 import org.xtext.sdu.ioT.IoTPackage;
 
@@ -22,6 +25,7 @@ import org.xtext.sdu.ioT.IoTPackage;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.ioT.impl.FetchDataConditionImpl#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.xtext.sdu.ioT.impl.FetchDataConditionImpl#getElse <em>Else</em>}</li>
  * </ul>
  *
  * @generated
@@ -29,24 +33,24 @@ import org.xtext.sdu.ioT.IoTPackage;
 public class FetchDataConditionImpl extends MinimalEObjectImpl.Container implements FetchDataCondition
 {
   /**
-   * The default value of the '{@link #getCondition() <em>Condition</em>}' attribute.
+   * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getCondition()
    * @generated
    * @ordered
    */
-  protected static final String CONDITION_EDEFAULT = null;
+  protected Condition condition;
 
   /**
-   * The cached value of the '{@link #getCondition() <em>Condition</em>}' attribute.
+   * The cached value of the '{@link #getElse() <em>Else</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCondition()
+   * @see #getElse()
    * @generated
    * @ordered
    */
-  protected String condition = CONDITION_EDEFAULT;
+  protected FetchDataCondition else_;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,7 +79,7 @@ public class FetchDataConditionImpl extends MinimalEObjectImpl.Container impleme
    * @generated
    */
   @Override
-  public String getCondition()
+  public Condition getCondition()
   {
     return condition;
   }
@@ -85,13 +89,106 @@ public class FetchDataConditionImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setCondition(String newCondition)
+  public NotificationChain basicSetCondition(Condition newCondition, NotificationChain msgs)
   {
-    String oldCondition = condition;
+    Condition oldCondition = condition;
     condition = newCondition;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, IoTPackage.FETCH_DATA_CONDITION__CONDITION, oldCondition, condition));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, IoTPackage.FETCH_DATA_CONDITION__CONDITION, oldCondition, newCondition);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setCondition(Condition newCondition)
+  {
+    if (newCondition != condition)
+    {
+      NotificationChain msgs = null;
+      if (condition != null)
+        msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - IoTPackage.FETCH_DATA_CONDITION__CONDITION, null, msgs);
+      if (newCondition != null)
+        msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - IoTPackage.FETCH_DATA_CONDITION__CONDITION, null, msgs);
+      msgs = basicSetCondition(newCondition, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, IoTPackage.FETCH_DATA_CONDITION__CONDITION, newCondition, newCondition));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public FetchDataCondition getElse()
+  {
+    return else_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetElse(FetchDataCondition newElse, NotificationChain msgs)
+  {
+    FetchDataCondition oldElse = else_;
+    else_ = newElse;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, IoTPackage.FETCH_DATA_CONDITION__ELSE, oldElse, newElse);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setElse(FetchDataCondition newElse)
+  {
+    if (newElse != else_)
+    {
+      NotificationChain msgs = null;
+      if (else_ != null)
+        msgs = ((InternalEObject)else_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - IoTPackage.FETCH_DATA_CONDITION__ELSE, null, msgs);
+      if (newElse != null)
+        msgs = ((InternalEObject)newElse).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - IoTPackage.FETCH_DATA_CONDITION__ELSE, null, msgs);
+      msgs = basicSetElse(newElse, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, IoTPackage.FETCH_DATA_CONDITION__ELSE, newElse, newElse));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case IoTPackage.FETCH_DATA_CONDITION__CONDITION:
+        return basicSetCondition(null, msgs);
+      case IoTPackage.FETCH_DATA_CONDITION__ELSE:
+        return basicSetElse(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -106,6 +203,8 @@ public class FetchDataConditionImpl extends MinimalEObjectImpl.Container impleme
     {
       case IoTPackage.FETCH_DATA_CONDITION__CONDITION:
         return getCondition();
+      case IoTPackage.FETCH_DATA_CONDITION__ELSE:
+        return getElse();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -121,7 +220,10 @@ public class FetchDataConditionImpl extends MinimalEObjectImpl.Container impleme
     switch (featureID)
     {
       case IoTPackage.FETCH_DATA_CONDITION__CONDITION:
-        setCondition((String)newValue);
+        setCondition((Condition)newValue);
+        return;
+      case IoTPackage.FETCH_DATA_CONDITION__ELSE:
+        setElse((FetchDataCondition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -138,7 +240,10 @@ public class FetchDataConditionImpl extends MinimalEObjectImpl.Container impleme
     switch (featureID)
     {
       case IoTPackage.FETCH_DATA_CONDITION__CONDITION:
-        setCondition(CONDITION_EDEFAULT);
+        setCondition((Condition)null);
+        return;
+      case IoTPackage.FETCH_DATA_CONDITION__ELSE:
+        setElse((FetchDataCondition)null);
         return;
     }
     super.eUnset(featureID);
@@ -155,26 +260,11 @@ public class FetchDataConditionImpl extends MinimalEObjectImpl.Container impleme
     switch (featureID)
     {
       case IoTPackage.FETCH_DATA_CONDITION__CONDITION:
-        return CONDITION_EDEFAULT == null ? condition != null : !CONDITION_EDEFAULT.equals(condition);
+        return condition != null;
+      case IoTPackage.FETCH_DATA_CONDITION__ELSE:
+        return else_ != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (condition: ");
-    result.append(condition);
-    result.append(')');
-    return result.toString();
   }
 
 } //FetchDataConditionImpl

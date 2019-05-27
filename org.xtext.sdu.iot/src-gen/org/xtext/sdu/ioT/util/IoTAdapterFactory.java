@@ -10,6 +10,9 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.xtext.sdu.ioT.AndCondition;
+import org.xtext.sdu.ioT.ComparisonCondition;
+import org.xtext.sdu.ioT.Condition;
 import org.xtext.sdu.ioT.Destination;
 import org.xtext.sdu.ioT.DestinationType;
 import org.xtext.sdu.ioT.DestinationTypes;
@@ -21,7 +24,10 @@ import org.xtext.sdu.ioT.FetchDataCondition;
 import org.xtext.sdu.ioT.FetchDataExpression;
 import org.xtext.sdu.ioT.IoTPackage;
 import org.xtext.sdu.ioT.Ip;
+import org.xtext.sdu.ioT.LiteralBool;
+import org.xtext.sdu.ioT.LiteralNumber;
 import org.xtext.sdu.ioT.Method;
+import org.xtext.sdu.ioT.OrCondition;
 import org.xtext.sdu.ioT.Portnumber;
 import org.xtext.sdu.ioT.Sensor;
 import org.xtext.sdu.ioT.SensorGetMethod;
@@ -192,6 +198,11 @@ public class IoTAdapterFactory extends AdapterFactoryImpl
         return createFetchDataConditionAdapter();
       }
       @Override
+      public Adapter caseCondition(Condition object)
+      {
+        return createConditionAdapter();
+      }
+      @Override
       public Adapter caseIp(Ip object)
       {
         return createIpAdapter();
@@ -205,6 +216,31 @@ public class IoTAdapterFactory extends AdapterFactoryImpl
       public Adapter caseTime(Time object)
       {
         return createTimeAdapter();
+      }
+      @Override
+      public Adapter caseOrCondition(OrCondition object)
+      {
+        return createOrConditionAdapter();
+      }
+      @Override
+      public Adapter caseAndCondition(AndCondition object)
+      {
+        return createAndConditionAdapter();
+      }
+      @Override
+      public Adapter caseComparisonCondition(ComparisonCondition object)
+      {
+        return createComparisonConditionAdapter();
+      }
+      @Override
+      public Adapter caseLiteralBool(LiteralBool object)
+      {
+        return createLiteralBoolAdapter();
+      }
+      @Override
+      public Adapter caseLiteralNumber(LiteralNumber object)
+      {
+        return createLiteralNumberAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -514,6 +550,21 @@ public class IoTAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.ioT.Condition <em>Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.ioT.Condition
+   * @generated
+   */
+  public Adapter createConditionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.xtext.sdu.ioT.Ip <em>Ip</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -554,6 +605,81 @@ public class IoTAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTimeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.ioT.OrCondition <em>Or Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.ioT.OrCondition
+   * @generated
+   */
+  public Adapter createOrConditionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.ioT.AndCondition <em>And Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.ioT.AndCondition
+   * @generated
+   */
+  public Adapter createAndConditionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.ioT.ComparisonCondition <em>Comparison Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.ioT.ComparisonCondition
+   * @generated
+   */
+  public Adapter createComparisonConditionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.ioT.LiteralBool <em>Literal Bool</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.ioT.LiteralBool
+   * @generated
+   */
+  public Adapter createLiteralBoolAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.ioT.LiteralNumber <em>Literal Number</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.ioT.LiteralNumber
+   * @generated
+   */
+  public Adapter createLiteralNumberAdapter()
   {
     return null;
   }

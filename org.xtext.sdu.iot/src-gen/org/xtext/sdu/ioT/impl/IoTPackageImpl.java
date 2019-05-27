@@ -10,6 +10,9 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.xtext.sdu.ioT.AndCondition;
+import org.xtext.sdu.ioT.ComparisonCondition;
+import org.xtext.sdu.ioT.Condition;
 import org.xtext.sdu.ioT.Destination;
 import org.xtext.sdu.ioT.DestinationType;
 import org.xtext.sdu.ioT.DestinationTypes;
@@ -22,7 +25,10 @@ import org.xtext.sdu.ioT.FetchDataExpression;
 import org.xtext.sdu.ioT.IoTFactory;
 import org.xtext.sdu.ioT.IoTPackage;
 import org.xtext.sdu.ioT.Ip;
+import org.xtext.sdu.ioT.LiteralBool;
+import org.xtext.sdu.ioT.LiteralNumber;
 import org.xtext.sdu.ioT.Method;
+import org.xtext.sdu.ioT.OrCondition;
 import org.xtext.sdu.ioT.Portnumber;
 import org.xtext.sdu.ioT.Sensor;
 import org.xtext.sdu.ioT.SensorGetMethod;
@@ -180,6 +186,13 @@ public class IoTPackageImpl extends EPackageImpl implements IoTPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass conditionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass ipEClass = null;
 
   /**
@@ -195,6 +208,41 @@ public class IoTPackageImpl extends EPackageImpl implements IoTPackage
    * @generated
    */
   private EClass timeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass orConditionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass andConditionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass comparisonConditionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass literalBoolEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass literalNumberEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -771,9 +819,20 @@ public class IoTPackageImpl extends EPackageImpl implements IoTPackage
    * @generated
    */
   @Override
-  public EReference getFetchData_ConExp()
+  public EReference getFetchData_Condition()
   {
     return (EReference)fetchDataEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getFetchData_Triggered()
+  {
+    return (EReference)fetchDataEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -826,9 +885,31 @@ public class IoTPackageImpl extends EPackageImpl implements IoTPackage
    * @generated
    */
   @Override
-  public EAttribute getFetchDataCondition_Condition()
+  public EReference getFetchDataCondition_Condition()
   {
-    return (EAttribute)fetchDataConditionEClass.getEStructuralFeatures().get(0);
+    return (EReference)fetchDataConditionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getFetchDataCondition_Else()
+  {
+    return (EReference)fetchDataConditionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getCondition()
+  {
+    return conditionEClass;
   }
 
   /**
@@ -895,6 +976,160 @@ public class IoTPackageImpl extends EPackageImpl implements IoTPackage
   public EAttribute getTime_Time()
   {
     return (EAttribute)timeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getOrCondition()
+  {
+    return orConditionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getOrCondition_Left()
+  {
+    return (EReference)orConditionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getOrCondition_Right()
+  {
+    return (EReference)orConditionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getAndCondition()
+  {
+    return andConditionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getAndCondition_Left()
+  {
+    return (EReference)andConditionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getAndCondition_Right()
+  {
+    return (EReference)andConditionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getComparisonCondition()
+  {
+    return comparisonConditionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getComparisonCondition_Left()
+  {
+    return (EReference)comparisonConditionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getComparisonCondition_Operator()
+  {
+    return (EAttribute)comparisonConditionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getComparisonCondition_Right()
+  {
+    return (EReference)comparisonConditionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getLiteralBool()
+  {
+    return literalBoolEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getLiteralBool_Value()
+  {
+    return (EAttribute)literalBoolEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getLiteralNumber()
+  {
+    return literalNumberEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getLiteralNumber_Value()
+  {
+    return (EAttribute)literalNumberEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -990,14 +1225,18 @@ public class IoTPackageImpl extends EPackageImpl implements IoTPackage
     createEReference(fetchDataEClass, FETCH_DATA__FILTER);
     createEReference(fetchDataEClass, FETCH_DATA__DEVICE);
     createEReference(fetchDataEClass, FETCH_DATA__DESTINATION);
-    createEReference(fetchDataEClass, FETCH_DATA__CON_EXP);
+    createEReference(fetchDataEClass, FETCH_DATA__CONDITION);
+    createEReference(fetchDataEClass, FETCH_DATA__TRIGGERED);
 
     fetchDataExpressionEClass = createEClass(FETCH_DATA_EXPRESSION);
     createEReference(fetchDataExpressionEClass, FETCH_DATA_EXPRESSION__DURATION);
     createEAttribute(fetchDataExpressionEClass, FETCH_DATA_EXPRESSION__TIME_UNIT);
 
     fetchDataConditionEClass = createEClass(FETCH_DATA_CONDITION);
-    createEAttribute(fetchDataConditionEClass, FETCH_DATA_CONDITION__CONDITION);
+    createEReference(fetchDataConditionEClass, FETCH_DATA_CONDITION__CONDITION);
+    createEReference(fetchDataConditionEClass, FETCH_DATA_CONDITION__ELSE);
+
+    conditionEClass = createEClass(CONDITION);
 
     ipEClass = createEClass(IP);
     createEAttribute(ipEClass, IP__IP);
@@ -1007,6 +1246,25 @@ public class IoTPackageImpl extends EPackageImpl implements IoTPackage
 
     timeEClass = createEClass(TIME);
     createEAttribute(timeEClass, TIME__TIME);
+
+    orConditionEClass = createEClass(OR_CONDITION);
+    createEReference(orConditionEClass, OR_CONDITION__LEFT);
+    createEReference(orConditionEClass, OR_CONDITION__RIGHT);
+
+    andConditionEClass = createEClass(AND_CONDITION);
+    createEReference(andConditionEClass, AND_CONDITION__LEFT);
+    createEReference(andConditionEClass, AND_CONDITION__RIGHT);
+
+    comparisonConditionEClass = createEClass(COMPARISON_CONDITION);
+    createEReference(comparisonConditionEClass, COMPARISON_CONDITION__LEFT);
+    createEAttribute(comparisonConditionEClass, COMPARISON_CONDITION__OPERATOR);
+    createEReference(comparisonConditionEClass, COMPARISON_CONDITION__RIGHT);
+
+    literalBoolEClass = createEClass(LITERAL_BOOL);
+    createEAttribute(literalBoolEClass, LITERAL_BOOL__VALUE);
+
+    literalNumberEClass = createEClass(LITERAL_NUMBER);
+    createEAttribute(literalNumberEClass, LITERAL_NUMBER__VALUE);
   }
 
   /**
@@ -1038,6 +1296,12 @@ public class IoTPackageImpl extends EPackageImpl implements IoTPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    methodEClass.getESuperTypes().add(this.getCondition());
+    orConditionEClass.getESuperTypes().add(this.getCondition());
+    andConditionEClass.getESuperTypes().add(this.getCondition());
+    comparisonConditionEClass.getESuperTypes().add(this.getCondition());
+    literalBoolEClass.getESuperTypes().add(this.getCondition());
+    literalNumberEClass.getESuperTypes().add(this.getCondition());
 
     // Initialize classes and features; add operations and parameters
     initEClass(systemEClass, org.xtext.sdu.ioT.System.class, "System", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1102,14 +1366,18 @@ public class IoTPackageImpl extends EPackageImpl implements IoTPackage
     initEReference(getFetchData_Filter(), ecorePackage.getEObject(), null, "filter", null, 0, 1, FetchData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFetchData_Device(), this.getDevice(), null, "device", null, 0, 1, FetchData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFetchData_Destination(), ecorePackage.getEObject(), null, "destination", null, 0, 1, FetchData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFetchData_ConExp(), ecorePackage.getEObject(), null, "conExp", null, 0, 1, FetchData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFetchData_Condition(), this.getFetchDataCondition(), null, "condition", null, 0, 1, FetchData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFetchData_Triggered(), this.getFetchDataExpression(), null, "triggered", null, 0, 1, FetchData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(fetchDataExpressionEClass, FetchDataExpression.class, "FetchDataExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getFetchDataExpression_Duration(), this.getTime(), null, "duration", null, 0, 1, FetchDataExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getFetchDataExpression_TimeUnit(), ecorePackage.getEString(), "timeUnit", null, 0, 1, FetchDataExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(fetchDataConditionEClass, FetchDataCondition.class, "FetchDataCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFetchDataCondition_Condition(), ecorePackage.getEString(), "condition", null, 0, 1, FetchDataCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFetchDataCondition_Condition(), this.getCondition(), null, "condition", null, 0, 1, FetchDataCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFetchDataCondition_Else(), this.getFetchDataCondition(), null, "else", null, 0, 1, FetchDataCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(conditionEClass, Condition.class, "Condition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(ipEClass, Ip.class, "Ip", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getIp_Ip(), ecorePackage.getEInt(), "ip", null, 0, -1, Ip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1119,6 +1387,25 @@ public class IoTPackageImpl extends EPackageImpl implements IoTPackage
 
     initEClass(timeEClass, Time.class, "Time", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTime_Time(), ecorePackage.getEInt(), "time", null, 0, 1, Time.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(orConditionEClass, OrCondition.class, "OrCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getOrCondition_Left(), this.getCondition(), null, "left", null, 0, 1, OrCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getOrCondition_Right(), this.getCondition(), null, "right", null, 0, 1, OrCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(andConditionEClass, AndCondition.class, "AndCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAndCondition_Left(), this.getCondition(), null, "left", null, 0, 1, AndCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAndCondition_Right(), this.getCondition(), null, "right", null, 0, 1, AndCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(comparisonConditionEClass, ComparisonCondition.class, "ComparisonCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getComparisonCondition_Left(), this.getCondition(), null, "left", null, 0, 1, ComparisonCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getComparisonCondition_Operator(), ecorePackage.getEString(), "operator", null, 0, 1, ComparisonCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getComparisonCondition_Right(), this.getCondition(), null, "right", null, 0, 1, ComparisonCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(literalBoolEClass, LiteralBool.class, "LiteralBool", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLiteralBool_Value(), ecorePackage.getEString(), "value", null, 0, 1, LiteralBool.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(literalNumberEClass, LiteralNumber.class, "LiteralNumber", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLiteralNumber_Value(), ecorePackage.getEInt(), "value", null, 0, 1, LiteralNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

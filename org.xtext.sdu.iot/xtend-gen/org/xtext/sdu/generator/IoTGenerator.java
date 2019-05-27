@@ -19,11 +19,19 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.xtext.sdu.ioT.AndCondition;
+import org.xtext.sdu.ioT.ComparisonCondition;
+import org.xtext.sdu.ioT.Condition;
 import org.xtext.sdu.ioT.Device;
 import org.xtext.sdu.ioT.DeviceType;
 import org.xtext.sdu.ioT.DeviceTypes;
 import org.xtext.sdu.ioT.FetchData;
+import org.xtext.sdu.ioT.FetchDataCondition;
 import org.xtext.sdu.ioT.FetchDataExpression;
+import org.xtext.sdu.ioT.LiteralBool;
+import org.xtext.sdu.ioT.LiteralNumber;
+import org.xtext.sdu.ioT.Method;
+import org.xtext.sdu.ioT.OrCondition;
 import org.xtext.sdu.ioT.Sensor;
 import org.xtext.sdu.ioT.SensorGetMethod;
 import org.xtext.sdu.ioT.SensorGroup;
@@ -299,60 +307,222 @@ public class IoTGenerator extends AbstractGenerator {
         _builder.append(_name_10);
         _builder.append("_s.setblocking(True)");
         _builder.newLineIfNotEmpty();
-        _builder.append("while True:");
-        _builder.newLine();
-        _builder.append("   \t");
-        _builder.append("time.sleep(");
-        EObject _conExp = fetchDataWithServer.getConExp();
-        int _time = ((FetchDataExpression) _conExp).getDuration().getTime();
-        _builder.append(_time, "   \t");
-        _builder.append(")");
-        _builder.newLineIfNotEmpty();
         {
-          final Function1<SensorGetMethod, Boolean> _function_2 = (SensorGetMethod it) -> {
-            SensorType _type = it.getType();
-            EObject _filter = fetchDataWithServer.getFilter();
-            return Boolean.valueOf(Objects.equal(_type, ((SensorType) _filter)));
-          };
-          Iterable<SensorGetMethod> _iterable_1 = IteratorExtensions.<SensorGetMethod>toIterable(IteratorExtensions.<SensorGetMethod>filter(Iterators.<SensorGetMethod>filter(resource.getAllContents(), SensorGetMethod.class), _function_2));
-          for(final SensorGetMethod getMethod : _iterable_1) {
+          FetchDataExpression _triggered = fetchDataWithServer.getTriggered();
+          boolean _tripleNotEquals = (_triggered != null);
+          if (_tripleNotEquals) {
+            _builder.append("while True:");
+            _builder.newLine();
             _builder.append("   \t");
-            String _name_11 = server.getName();
-            _builder.append(_name_11, "   \t");
-            _builder.append("_s.sendall((b\'");
-            String _name_12 = scope.getName();
-            _builder.append(_name_12, "   \t");
-            _builder.append("|{0}|\'.format(");
-            final Function1<Sensor, Boolean> _function_3 = (Sensor it) -> {
-              SensorType _type = it.getType();
-              EObject _filter = fetchDataWithServer.getFilter();
-              return Boolean.valueOf(Objects.equal(_type, ((SensorType) _filter)));
-            };
-            String _name_13 = IteratorExtensions.<Sensor>head(IteratorExtensions.<Sensor>filter(Iterators.<Sensor>filter(resource.getAllContents(), Sensor.class), _function_3)).getName();
-            _builder.append(_name_13, "   \t");
-            _builder.append(".");
-            String _name_14 = getMethod.getMethod().getName();
-            _builder.append(_name_14, "   \t");
-            _builder.append("(");
+            _builder.append("time.sleep(");
+            FetchDataExpression _triggered_1 = fetchDataWithServer.getTriggered();
+            int _time = ((FetchDataExpression) _triggered_1).getDuration().getTime();
+            _builder.append(_time, "   \t");
+            _builder.append(")");
+            _builder.newLineIfNotEmpty();
             {
-              EList<String> _parameters = getMethod.getMethod().getParameters();
-              boolean _hasElements = false;
-              for(final String param : _parameters) {
-                if (!_hasElements) {
-                  _hasElements = true;
-                } else {
-                  _builder.appendImmediate(",", "   \t");
+              final Function1<SensorGetMethod, Boolean> _function_2 = (SensorGetMethod it) -> {
+                SensorType _type = it.getType();
+                EObject _filter = fetchDataWithServer.getFilter();
+                return Boolean.valueOf(Objects.equal(_type, ((SensorType) _filter)));
+              };
+              Iterable<SensorGetMethod> _iterable_1 = IteratorExtensions.<SensorGetMethod>toIterable(IteratorExtensions.<SensorGetMethod>filter(Iterators.<SensorGetMethod>filter(resource.getAllContents(), SensorGetMethod.class), _function_2));
+              for(final SensorGetMethod getMethod : _iterable_1) {
+                _builder.append("   \t");
+                String _name_11 = server.getName();
+                _builder.append(_name_11, "   \t");
+                _builder.append("_s.sendall((b\'");
+                String _name_12 = scope.getName();
+                _builder.append(_name_12, "   \t");
+                _builder.append("|{0}|\'.format(");
+                final Function1<Sensor, Boolean> _function_3 = (Sensor it) -> {
+                  SensorType _type = it.getType();
+                  EObject _filter = fetchDataWithServer.getFilter();
+                  return Boolean.valueOf(Objects.equal(_type, ((SensorType) _filter)));
+                };
+                String _name_13 = IteratorExtensions.<Sensor>head(IteratorExtensions.<Sensor>filter(Iterators.<Sensor>filter(resource.getAllContents(), Sensor.class), _function_3)).getName();
+                _builder.append(_name_13, "   \t");
+                _builder.append(".");
+                String _name_14 = getMethod.getMethod().getName();
+                _builder.append(_name_14, "   \t");
+                _builder.append("(");
+                {
+                  EList<String> _parameters = getMethod.getMethod().getParameters();
+                  boolean _hasElements = false;
+                  for(final String param : _parameters) {
+                    if (!_hasElements) {
+                      _hasElements = true;
+                    } else {
+                      _builder.appendImmediate(",", "   \t");
+                    }
+                    _builder.append(param, "   \t");
+                  }
                 }
-                _builder.append(param, "   \t");
+                _builder.append("))))");
+                _builder.newLineIfNotEmpty();
               }
             }
-            _builder.append("))))");
-            _builder.newLineIfNotEmpty();
+          } else {
+            FetchDataCondition _condition = fetchDataWithServer.getCondition();
+            boolean _tripleNotEquals_1 = (_condition != null);
+            if (_tripleNotEquals_1) {
+              _builder.append("while True:");
+              _builder.newLine();
+              {
+                final Function1<SensorGetMethod, Boolean> _function_4 = (SensorGetMethod it) -> {
+                  SensorType _type = it.getType();
+                  EObject _filter = fetchDataWithServer.getFilter();
+                  return Boolean.valueOf(Objects.equal(_type, ((SensorType) _filter)));
+                };
+                Iterable<SensorGetMethod> _iterable_2 = IteratorExtensions.<SensorGetMethod>toIterable(IteratorExtensions.<SensorGetMethod>filter(Iterators.<SensorGetMethod>filter(resource.getAllContents(), SensorGetMethod.class), _function_4));
+                for(final SensorGetMethod getMethod_1 : _iterable_2) {
+                  _builder.append("\t");
+                  CharSequence _emitCondition = this.emitCondition(fetchDataWithServer, getMethod_1, scope, resource, server);
+                  _builder.append(_emitCondition, "\t");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+              _builder.append("\t");
+              _builder.append("time.sleep(1)");
+              _builder.newLine();
+            }
           }
         }
       }
     }
     return _builder;
+  }
+  
+  public CharSequence emitCondition(final FetchData fetchData, final SensorGetMethod sensorGetMethod, final Device scope, final Resource resource, final Server server) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if(");
+    String _generateCondition = this.generateCondition(fetchData.getCondition().getCondition(), resource, fetchData);
+    _builder.append(_generateCondition);
+    _builder.append(")");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    String _name = server.getName();
+    _builder.append(_name, "\t");
+    _builder.append("_s.sendall((b\'");
+    String _name_1 = scope.getName();
+    _builder.append(_name_1, "\t");
+    _builder.append("|{0}|\'.format(");
+    final Function1<Sensor, Boolean> _function = (Sensor it) -> {
+      SensorType _type = it.getType();
+      EObject _filter = fetchData.getFilter();
+      return Boolean.valueOf(Objects.equal(_type, ((SensorType) _filter)));
+    };
+    String _name_2 = IteratorExtensions.<Sensor>head(IteratorExtensions.<Sensor>filter(Iterators.<Sensor>filter(resource.getAllContents(), Sensor.class), _function)).getName();
+    _builder.append(_name_2, "\t");
+    _builder.append(".");
+    String _name_3 = sensorGetMethod.getMethod().getName();
+    _builder.append(_name_3, "\t");
+    _builder.append("(");
+    {
+      EList<String> _parameters = sensorGetMethod.getMethod().getParameters();
+      boolean _hasElements = false;
+      for(final String param : _parameters) {
+        if (!_hasElements) {
+          _hasElements = true;
+        } else {
+          _builder.appendImmediate(",", "\t");
+        }
+        _builder.append(param, "\t");
+      }
+    }
+    _builder.append("))))");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public String generateCondition(final Condition con, final Resource resource, final FetchData fetchData) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (con instanceof OrCondition) {
+      _matched=true;
+      String _generateCondition = this.generateCondition(((OrCondition)con).getLeft(), resource, fetchData);
+      String _plus = (_generateCondition + " || ");
+      String _generateCondition_1 = this.generateCondition(((OrCondition)con).getRight(), resource, fetchData);
+      _switchResult = (_plus + _generateCondition_1);
+    }
+    if (!_matched) {
+      if (con instanceof AndCondition) {
+        _matched=true;
+        String _generateCondition = this.generateCondition(((AndCondition)con).getLeft(), resource, fetchData);
+        String _plus = (_generateCondition + " && ");
+        String _generateCondition_1 = this.generateCondition(((AndCondition)con).getRight(), resource, fetchData);
+        _switchResult = (_plus + _generateCondition_1);
+      }
+    }
+    if (!_matched) {
+      if (con instanceof ComparisonCondition) {
+        _matched=true;
+        String _generateCondition = this.generateCondition(((ComparisonCondition)con).getLeft(), resource, fetchData);
+        String _plus = (_generateCondition + " ");
+        String _operator = ((ComparisonCondition)con).getOperator();
+        String _plus_1 = (_plus + _operator);
+        String _plus_2 = (_plus_1 + " ");
+        String _generateCondition_1 = this.generateCondition(((ComparisonCondition)con).getRight(), resource, fetchData);
+        _switchResult = (_plus_2 + _generateCondition_1);
+      }
+    }
+    if (!_matched) {
+      if (con instanceof LiteralBool) {
+        _matched=true;
+        _switchResult = ((LiteralBool)con).getValue();
+      }
+    }
+    if (!_matched) {
+      if (con instanceof LiteralNumber) {
+        _matched=true;
+        _switchResult = Integer.toString(((LiteralNumber)con).getValue());
+      }
+    }
+    if (!_matched) {
+      if (con instanceof Method) {
+        _matched=true;
+        _switchResult = this.emitMethod(((Method)con), resource, fetchData);
+      }
+    }
+    if (!_matched) {
+      String _string = con.toString();
+      throw new Error(_string);
+    }
+    return _switchResult;
+  }
+  
+  public String emitMethod(final Method method, final Resource resource, final FetchData fetchData) {
+    StringConcatenation _builder = new StringConcatenation();
+    final Function1<SensorGetMethod, Boolean> _function = (SensorGetMethod it) -> {
+      String _name = it.getMethod().getName();
+      String _name_1 = method.getName();
+      return Boolean.valueOf(Objects.equal(_name, _name_1));
+    };
+    final SensorType sgm = IteratorExtensions.<SensorGetMethod>head(IteratorExtensions.<SensorGetMethod>filter(Iterators.<SensorGetMethod>filter(resource.getAllContents(), SensorGetMethod.class), _function)).getType();
+    final Function1<Sensor, Boolean> _function_1 = (Sensor it) -> {
+      SensorType _type = it.getType();
+      return Boolean.valueOf(Objects.equal(_type, sgm));
+    };
+    String _name = IteratorExtensions.<Sensor>head(IteratorExtensions.<Sensor>filter(Iterators.<Sensor>filter(resource.getAllContents(), Sensor.class), _function_1)).getName();
+    _builder.append(_name);
+    _builder.append(".");
+    String _name_1 = method.getName();
+    _builder.append(_name_1);
+    _builder.append("(");
+    {
+      EList<String> _parameters = method.getParameters();
+      boolean _hasElements = false;
+      for(final String param : _parameters) {
+        if (!_hasElements) {
+          _hasElements = true;
+        } else {
+          _builder.appendImmediate(",", "");
+        }
+        _builder.append(param);
+      }
+    }
+    _builder.append(")");
+    return _builder.toString();
   }
   
   public CharSequence emitSensorGetMethod(final Resource resourceRoot) {

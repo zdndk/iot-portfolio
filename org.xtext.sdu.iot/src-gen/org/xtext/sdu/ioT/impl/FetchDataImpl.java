@@ -15,6 +15,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.sdu.ioT.Device;
 import org.xtext.sdu.ioT.FetchData;
+import org.xtext.sdu.ioT.FetchDataCondition;
+import org.xtext.sdu.ioT.FetchDataExpression;
 import org.xtext.sdu.ioT.IoTPackage;
 
 /**
@@ -28,7 +30,8 @@ import org.xtext.sdu.ioT.IoTPackage;
  *   <li>{@link org.xtext.sdu.ioT.impl.FetchDataImpl#getFilter <em>Filter</em>}</li>
  *   <li>{@link org.xtext.sdu.ioT.impl.FetchDataImpl#getDevice <em>Device</em>}</li>
  *   <li>{@link org.xtext.sdu.ioT.impl.FetchDataImpl#getDestination <em>Destination</em>}</li>
- *   <li>{@link org.xtext.sdu.ioT.impl.FetchDataImpl#getConExp <em>Con Exp</em>}</li>
+ *   <li>{@link org.xtext.sdu.ioT.impl.FetchDataImpl#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.xtext.sdu.ioT.impl.FetchDataImpl#getTriggered <em>Triggered</em>}</li>
  * </ul>
  *
  * @generated
@@ -66,14 +69,24 @@ public class FetchDataImpl extends MinimalEObjectImpl.Container implements Fetch
   protected EObject destination;
 
   /**
-   * The cached value of the '{@link #getConExp() <em>Con Exp</em>}' containment reference.
+   * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getConExp()
+   * @see #getCondition()
    * @generated
    * @ordered
    */
-  protected EObject conExp;
+  protected FetchDataCondition condition;
+
+  /**
+   * The cached value of the '{@link #getTriggered() <em>Triggered</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTriggered()
+   * @generated
+   * @ordered
+   */
+  protected FetchDataExpression triggered;
 
   /**
    * <!-- begin-user-doc -->
@@ -237,9 +250,9 @@ public class FetchDataImpl extends MinimalEObjectImpl.Container implements Fetch
    * @generated
    */
   @Override
-  public EObject getConExp()
+  public FetchDataCondition getCondition()
   {
-    return conExp;
+    return condition;
   }
 
   /**
@@ -247,13 +260,13 @@ public class FetchDataImpl extends MinimalEObjectImpl.Container implements Fetch
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetConExp(EObject newConExp, NotificationChain msgs)
+  public NotificationChain basicSetCondition(FetchDataCondition newCondition, NotificationChain msgs)
   {
-    EObject oldConExp = conExp;
-    conExp = newConExp;
+    FetchDataCondition oldCondition = condition;
+    condition = newCondition;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, IoTPackage.FETCH_DATA__CON_EXP, oldConExp, newConExp);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, IoTPackage.FETCH_DATA__CONDITION, oldCondition, newCondition);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -265,20 +278,70 @@ public class FetchDataImpl extends MinimalEObjectImpl.Container implements Fetch
    * @generated
    */
   @Override
-  public void setConExp(EObject newConExp)
+  public void setCondition(FetchDataCondition newCondition)
   {
-    if (newConExp != conExp)
+    if (newCondition != condition)
     {
       NotificationChain msgs = null;
-      if (conExp != null)
-        msgs = ((InternalEObject)conExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - IoTPackage.FETCH_DATA__CON_EXP, null, msgs);
-      if (newConExp != null)
-        msgs = ((InternalEObject)newConExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - IoTPackage.FETCH_DATA__CON_EXP, null, msgs);
-      msgs = basicSetConExp(newConExp, msgs);
+      if (condition != null)
+        msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - IoTPackage.FETCH_DATA__CONDITION, null, msgs);
+      if (newCondition != null)
+        msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - IoTPackage.FETCH_DATA__CONDITION, null, msgs);
+      msgs = basicSetCondition(newCondition, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, IoTPackage.FETCH_DATA__CON_EXP, newConExp, newConExp));
+      eNotify(new ENotificationImpl(this, Notification.SET, IoTPackage.FETCH_DATA__CONDITION, newCondition, newCondition));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public FetchDataExpression getTriggered()
+  {
+    return triggered;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetTriggered(FetchDataExpression newTriggered, NotificationChain msgs)
+  {
+    FetchDataExpression oldTriggered = triggered;
+    triggered = newTriggered;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, IoTPackage.FETCH_DATA__TRIGGERED, oldTriggered, newTriggered);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTriggered(FetchDataExpression newTriggered)
+  {
+    if (newTriggered != triggered)
+    {
+      NotificationChain msgs = null;
+      if (triggered != null)
+        msgs = ((InternalEObject)triggered).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - IoTPackage.FETCH_DATA__TRIGGERED, null, msgs);
+      if (newTriggered != null)
+        msgs = ((InternalEObject)newTriggered).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - IoTPackage.FETCH_DATA__TRIGGERED, null, msgs);
+      msgs = basicSetTriggered(newTriggered, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, IoTPackage.FETCH_DATA__TRIGGERED, newTriggered, newTriggered));
   }
 
   /**
@@ -291,8 +354,10 @@ public class FetchDataImpl extends MinimalEObjectImpl.Container implements Fetch
   {
     switch (featureID)
     {
-      case IoTPackage.FETCH_DATA__CON_EXP:
-        return basicSetConExp(null, msgs);
+      case IoTPackage.FETCH_DATA__CONDITION:
+        return basicSetCondition(null, msgs);
+      case IoTPackage.FETCH_DATA__TRIGGERED:
+        return basicSetTriggered(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -316,8 +381,10 @@ public class FetchDataImpl extends MinimalEObjectImpl.Container implements Fetch
       case IoTPackage.FETCH_DATA__DESTINATION:
         if (resolve) return getDestination();
         return basicGetDestination();
-      case IoTPackage.FETCH_DATA__CON_EXP:
-        return getConExp();
+      case IoTPackage.FETCH_DATA__CONDITION:
+        return getCondition();
+      case IoTPackage.FETCH_DATA__TRIGGERED:
+        return getTriggered();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -341,8 +408,11 @@ public class FetchDataImpl extends MinimalEObjectImpl.Container implements Fetch
       case IoTPackage.FETCH_DATA__DESTINATION:
         setDestination((EObject)newValue);
         return;
-      case IoTPackage.FETCH_DATA__CON_EXP:
-        setConExp((EObject)newValue);
+      case IoTPackage.FETCH_DATA__CONDITION:
+        setCondition((FetchDataCondition)newValue);
+        return;
+      case IoTPackage.FETCH_DATA__TRIGGERED:
+        setTriggered((FetchDataExpression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -367,8 +437,11 @@ public class FetchDataImpl extends MinimalEObjectImpl.Container implements Fetch
       case IoTPackage.FETCH_DATA__DESTINATION:
         setDestination((EObject)null);
         return;
-      case IoTPackage.FETCH_DATA__CON_EXP:
-        setConExp((EObject)null);
+      case IoTPackage.FETCH_DATA__CONDITION:
+        setCondition((FetchDataCondition)null);
+        return;
+      case IoTPackage.FETCH_DATA__TRIGGERED:
+        setTriggered((FetchDataExpression)null);
         return;
     }
     super.eUnset(featureID);
@@ -390,8 +463,10 @@ public class FetchDataImpl extends MinimalEObjectImpl.Container implements Fetch
         return device != null;
       case IoTPackage.FETCH_DATA__DESTINATION:
         return destination != null;
-      case IoTPackage.FETCH_DATA__CON_EXP:
-        return conExp != null;
+      case IoTPackage.FETCH_DATA__CONDITION:
+        return condition != null;
+      case IoTPackage.FETCH_DATA__TRIGGERED:
+        return triggered != null;
     }
     return super.eIsSet(featureID);
   }

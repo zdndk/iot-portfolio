@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.ioT.FetchDataCondition#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.xtext.sdu.ioT.FetchDataCondition#getElse <em>Else</em>}</li>
  * </ul>
  *
  * @see org.xtext.sdu.ioT.IoTPackage#getFetchDataCondition()
@@ -24,29 +25,55 @@ import org.eclipse.emf.ecore.EObject;
 public interface FetchDataCondition extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Condition</b></em>' attribute.
+   * Returns the value of the '<em><b>Condition</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Condition</em>' attribute isn't clear,
+   * If the meaning of the '<em>Condition</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Condition</em>' attribute.
-   * @see #setCondition(String)
+   * @return the value of the '<em>Condition</em>' containment reference.
+   * @see #setCondition(Condition)
    * @see org.xtext.sdu.ioT.IoTPackage#getFetchDataCondition_Condition()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getCondition();
+  Condition getCondition();
 
   /**
-   * Sets the value of the '{@link org.xtext.sdu.ioT.FetchDataCondition#getCondition <em>Condition</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.sdu.ioT.FetchDataCondition#getCondition <em>Condition</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Condition</em>' attribute.
+   * @param value the new value of the '<em>Condition</em>' containment reference.
    * @see #getCondition()
    * @generated
    */
-  void setCondition(String value);
+  void setCondition(Condition value);
+
+  /**
+   * Returns the value of the '<em><b>Else</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Else</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Else</em>' containment reference.
+   * @see #setElse(FetchDataCondition)
+   * @see org.xtext.sdu.ioT.IoTPackage#getFetchDataCondition_Else()
+   * @model containment="true"
+   * @generated
+   */
+  FetchDataCondition getElse();
+
+  /**
+   * Sets the value of the '{@link org.xtext.sdu.ioT.FetchDataCondition#getElse <em>Else</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Else</em>' containment reference.
+   * @see #getElse()
+   * @generated
+   */
+  void setElse(FetchDataCondition value);
 
 } // FetchDataCondition

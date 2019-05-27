@@ -5,8 +5,6 @@ package org.xtext.sdu.ioT;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Method</b></em>'.
@@ -24,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Method extends EObject
+public interface Method extends Condition
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

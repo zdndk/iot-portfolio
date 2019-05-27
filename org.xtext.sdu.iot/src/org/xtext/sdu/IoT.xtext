@@ -67,7 +67,7 @@ Destination:
 ;
 
 FetchData:
-	'Fetch' 'data' 'from' ('type' filter=[SensorType] | 'group' filter=[SensorGroup]) 'for' 'device' device=[Device] 'to' ('destination' destination=[Destination] | 'server' destination=[Server]) (conExp=FetchDataExpression | conExp=FetchDataCondition)?
+	'Fetch' 'data' 'from' ('type' filter=[SensorType] | 'group' filter=[SensorGroup]) 'for' 'device' device=[Device] 'to' ('destination' destination=[Destination] | 'server' destination=[Server]) (=>'condition' condition=FetchDataCondition)? (=>'triggered' triggered=FetchDataExpression)?
 ;
 
 FetchDataExpression:
@@ -75,7 +75,7 @@ FetchDataExpression:
 ;
 
 FetchDataCondition:
-	('when' | 'if') condition=Condition
+	'if'('(' condition=Condition ')') (=>'else' else=FetchDataCondition)?
 ;
 
 TimeUnit:
@@ -83,7 +83,35 @@ TimeUnit:
 ;
 
 Condition:
-	'_??'	
+	OrCondition
+;
+
+OrCondition returns Condition:
+    AndCondition ({OrCondition.left=current} "||" right=AndCondition)*  
+;   
+
+AndCondition returns Condition:
+    ComparisonCondition ({AndCondition.left=current} "&&" right=ComparisonCondition)*  
+;
+
+ComparisonCondition returns Condition:
+    PrimaryCondition ({ComparisonCondition.left=current} operator=("<"|"<="|"=="|">="|">") right=PrimaryCondition)*
+;
+
+PrimaryCondition returns Condition:
+    "(" Condition ")" | LiteralBoolean | LiteralInteger | LiteralMethod
+;
+
+LiteralBoolean returns Condition:
+     {LiteralBool} value="true" | {LiteralBool} value="false"
+;
+
+LiteralMethod returns Condition:
+	Method
+;
+
+LiteralInteger returns Condition:
+	{LiteralNumber} value=INT
 ;
 
 Ip:

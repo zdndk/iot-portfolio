@@ -11,6 +11,9 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import org.xtext.sdu.ioT.AndCondition;
+import org.xtext.sdu.ioT.ComparisonCondition;
+import org.xtext.sdu.ioT.Condition;
 import org.xtext.sdu.ioT.Destination;
 import org.xtext.sdu.ioT.DestinationType;
 import org.xtext.sdu.ioT.DestinationTypes;
@@ -23,7 +26,10 @@ import org.xtext.sdu.ioT.FetchDataExpression;
 import org.xtext.sdu.ioT.IoTFactory;
 import org.xtext.sdu.ioT.IoTPackage;
 import org.xtext.sdu.ioT.Ip;
+import org.xtext.sdu.ioT.LiteralBool;
+import org.xtext.sdu.ioT.LiteralNumber;
 import org.xtext.sdu.ioT.Method;
+import org.xtext.sdu.ioT.OrCondition;
 import org.xtext.sdu.ioT.Portnumber;
 import org.xtext.sdu.ioT.Sensor;
 import org.xtext.sdu.ioT.SensorGetMethod;
@@ -106,9 +112,15 @@ public class IoTFactoryImpl extends EFactoryImpl implements IoTFactory
       case IoTPackage.FETCH_DATA: return createFetchData();
       case IoTPackage.FETCH_DATA_EXPRESSION: return createFetchDataExpression();
       case IoTPackage.FETCH_DATA_CONDITION: return createFetchDataCondition();
+      case IoTPackage.CONDITION: return createCondition();
       case IoTPackage.IP: return createIp();
       case IoTPackage.PORTNUMBER: return createPortnumber();
       case IoTPackage.TIME: return createTime();
+      case IoTPackage.OR_CONDITION: return createOrCondition();
+      case IoTPackage.AND_CONDITION: return createAndCondition();
+      case IoTPackage.COMPARISON_CONDITION: return createComparisonCondition();
+      case IoTPackage.LITERAL_BOOL: return createLiteralBool();
+      case IoTPackage.LITERAL_NUMBER: return createLiteralNumber();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -348,6 +360,18 @@ public class IoTFactoryImpl extends EFactoryImpl implements IoTFactory
    * @generated
    */
   @Override
+  public Condition createCondition()
+  {
+    ConditionImpl condition = new ConditionImpl();
+    return condition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Ip createIp()
   {
     IpImpl ip = new IpImpl();
@@ -376,6 +400,66 @@ public class IoTFactoryImpl extends EFactoryImpl implements IoTFactory
   {
     TimeImpl time = new TimeImpl();
     return time;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public OrCondition createOrCondition()
+  {
+    OrConditionImpl orCondition = new OrConditionImpl();
+    return orCondition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public AndCondition createAndCondition()
+  {
+    AndConditionImpl andCondition = new AndConditionImpl();
+    return andCondition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ComparisonCondition createComparisonCondition()
+  {
+    ComparisonConditionImpl comparisonCondition = new ComparisonConditionImpl();
+    return comparisonCondition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public LiteralBool createLiteralBool()
+  {
+    LiteralBoolImpl literalBool = new LiteralBoolImpl();
+    return literalBool;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public LiteralNumber createLiteralNumber()
+  {
+    LiteralNumberImpl literalNumber = new LiteralNumberImpl();
+    return literalNumber;
   }
 
   /**

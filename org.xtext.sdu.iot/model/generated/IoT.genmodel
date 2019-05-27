@@ -68,15 +68,18 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IoT.ecore#//FetchData/filter"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IoT.ecore#//FetchData/device"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IoT.ecore#//FetchData/destination"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IoT.ecore#//FetchData/conExp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IoT.ecore#//FetchData/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IoT.ecore#//FetchData/triggered"/>
     </genClasses>
     <genClasses ecoreClass="IoT.ecore#//FetchDataExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IoT.ecore#//FetchDataExpression/duration"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IoT.ecore#//FetchDataExpression/timeUnit"/>
     </genClasses>
     <genClasses ecoreClass="IoT.ecore#//FetchDataCondition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IoT.ecore#//FetchDataCondition/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IoT.ecore#//FetchDataCondition/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IoT.ecore#//FetchDataCondition/else"/>
     </genClasses>
+    <genClasses ecoreClass="IoT.ecore#//Condition"/>
     <genClasses ecoreClass="IoT.ecore#//Ip">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IoT.ecore#//Ip/ip"/>
     </genClasses>
@@ -85,6 +88,25 @@
     </genClasses>
     <genClasses ecoreClass="IoT.ecore#//Time">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IoT.ecore#//Time/time"/>
+    </genClasses>
+    <genClasses ecoreClass="IoT.ecore#//OrCondition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IoT.ecore#//OrCondition/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IoT.ecore#//OrCondition/right"/>
+    </genClasses>
+    <genClasses ecoreClass="IoT.ecore#//AndCondition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IoT.ecore#//AndCondition/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IoT.ecore#//AndCondition/right"/>
+    </genClasses>
+    <genClasses ecoreClass="IoT.ecore#//ComparisonCondition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IoT.ecore#//ComparisonCondition/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IoT.ecore#//ComparisonCondition/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IoT.ecore#//ComparisonCondition/right"/>
+    </genClasses>
+    <genClasses ecoreClass="IoT.ecore#//LiteralBool">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IoT.ecore#//LiteralBool/value"/>
+    </genClasses>
+    <genClasses ecoreClass="IoT.ecore#//LiteralNumber">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IoT.ecore#//LiteralNumber/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -14,6 +14,8 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+import org.xtext.sdu.ioT.AndCondition;
+import org.xtext.sdu.ioT.ComparisonCondition;
 import org.xtext.sdu.ioT.Destination;
 import org.xtext.sdu.ioT.DestinationType;
 import org.xtext.sdu.ioT.DestinationTypes;
@@ -25,7 +27,10 @@ import org.xtext.sdu.ioT.FetchDataCondition;
 import org.xtext.sdu.ioT.FetchDataExpression;
 import org.xtext.sdu.ioT.IoTPackage;
 import org.xtext.sdu.ioT.Ip;
+import org.xtext.sdu.ioT.LiteralBool;
+import org.xtext.sdu.ioT.LiteralNumber;
 import org.xtext.sdu.ioT.Method;
+import org.xtext.sdu.ioT.OrCondition;
 import org.xtext.sdu.ioT.Portnumber;
 import org.xtext.sdu.ioT.Sensor;
 import org.xtext.sdu.ioT.SensorGetMethod;
@@ -52,6 +57,12 @@ public class IoTSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == IoTPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case IoTPackage.AND_CONDITION:
+				sequence_AndCondition(context, (AndCondition) semanticObject); 
+				return; 
+			case IoTPackage.COMPARISON_CONDITION:
+				sequence_ComparisonCondition(context, (ComparisonCondition) semanticObject); 
+				return; 
 			case IoTPackage.DESTINATION:
 				sequence_Destination(context, (Destination) semanticObject); 
 				return; 
@@ -82,8 +93,17 @@ public class IoTSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case IoTPackage.IP:
 				sequence_Ip(context, (Ip) semanticObject); 
 				return; 
+			case IoTPackage.LITERAL_BOOL:
+				sequence_LiteralBoolean(context, (LiteralBool) semanticObject); 
+				return; 
+			case IoTPackage.LITERAL_NUMBER:
+				sequence_LiteralInteger(context, (LiteralNumber) semanticObject); 
+				return; 
 			case IoTPackage.METHOD:
 				sequence_Method(context, (Method) semanticObject); 
+				return; 
+			case IoTPackage.OR_CONDITION:
+				sequence_OrCondition(context, (OrCondition) semanticObject); 
 				return; 
 			case IoTPackage.PORTNUMBER:
 				sequence_Portnumber(context, (Portnumber) semanticObject); 
@@ -122,6 +142,57 @@ public class IoTSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Contexts:
+	 *     Condition returns AndCondition
+	 *     OrCondition returns AndCondition
+	 *     OrCondition.OrCondition_1_0 returns AndCondition
+	 *     AndCondition returns AndCondition
+	 *     AndCondition.AndCondition_1_0 returns AndCondition
+	 *     ComparisonCondition returns AndCondition
+	 *     ComparisonCondition.ComparisonCondition_1_0 returns AndCondition
+	 *     PrimaryCondition returns AndCondition
+	 *
+	 * Constraint:
+	 *     (left=AndCondition_AndCondition_1_0 right=ComparisonCondition)
+	 */
+	protected void sequence_AndCondition(ISerializationContext context, AndCondition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, IoTPackage.Literals.AND_CONDITION__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, IoTPackage.Literals.AND_CONDITION__LEFT));
+			if (transientValues.isValueTransient(semanticObject, IoTPackage.Literals.AND_CONDITION__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, IoTPackage.Literals.AND_CONDITION__RIGHT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAndConditionAccess().getAndConditionLeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getAndConditionAccess().getRightComparisonConditionParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Condition returns ComparisonCondition
+	 *     OrCondition returns ComparisonCondition
+	 *     OrCondition.OrCondition_1_0 returns ComparisonCondition
+	 *     AndCondition returns ComparisonCondition
+	 *     AndCondition.AndCondition_1_0 returns ComparisonCondition
+	 *     ComparisonCondition returns ComparisonCondition
+	 *     ComparisonCondition.ComparisonCondition_1_0 returns ComparisonCondition
+	 *     PrimaryCondition returns ComparisonCondition
+	 *
+	 * Constraint:
+	 *     (
+	 *         left=ComparisonCondition_ComparisonCondition_1_0 
+	 *         (operator='<' | operator='<=' | operator='==' | operator='>=' | operator='>') 
+	 *         right=PrimaryCondition
+	 *     )
+	 */
+	protected void sequence_ComparisonCondition(ISerializationContext context, ComparisonCondition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * Contexts:
@@ -221,16 +292,10 @@ public class IoTSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     FetchDataCondition returns FetchDataCondition
 	 *
 	 * Constraint:
-	 *     condition=Condition
+	 *     (condition=Condition else=FetchDataCondition?)
 	 */
 	protected void sequence_FetchDataCondition(ISerializationContext context, FetchDataCondition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, IoTPackage.Literals.FETCH_DATA_CONDITION__CONDITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, IoTPackage.Literals.FETCH_DATA_CONDITION__CONDITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFetchDataConditionAccess().getConditionConditionParserRuleCall_1_0(), semanticObject.getCondition());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -264,7 +329,8 @@ public class IoTSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *         (filter=[SensorType|ID] | filter=[SensorGroup|ID]) 
 	 *         device=[Device|ID] 
 	 *         (destination=[Destination|ID] | destination=[Server|ID]) 
-	 *         (conExp=FetchDataExpression | conExp=FetchDataCondition)?
+	 *         condition=FetchDataCondition? 
+	 *         triggered=FetchDataExpression?
 	 *     )
 	 */
 	protected void sequence_FetchData(ISerializationContext context, FetchData semanticObject) {
@@ -286,13 +352,96 @@ public class IoTSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     Condition returns LiteralBool
+	 *     OrCondition returns LiteralBool
+	 *     OrCondition.OrCondition_1_0 returns LiteralBool
+	 *     AndCondition returns LiteralBool
+	 *     AndCondition.AndCondition_1_0 returns LiteralBool
+	 *     ComparisonCondition returns LiteralBool
+	 *     ComparisonCondition.ComparisonCondition_1_0 returns LiteralBool
+	 *     PrimaryCondition returns LiteralBool
+	 *     LiteralBoolean returns LiteralBool
+	 *
+	 * Constraint:
+	 *     (value='true' | value='false')
+	 */
+	protected void sequence_LiteralBoolean(ISerializationContext context, LiteralBool semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Condition returns LiteralNumber
+	 *     OrCondition returns LiteralNumber
+	 *     OrCondition.OrCondition_1_0 returns LiteralNumber
+	 *     AndCondition returns LiteralNumber
+	 *     AndCondition.AndCondition_1_0 returns LiteralNumber
+	 *     ComparisonCondition returns LiteralNumber
+	 *     ComparisonCondition.ComparisonCondition_1_0 returns LiteralNumber
+	 *     PrimaryCondition returns LiteralNumber
+	 *     LiteralInteger returns LiteralNumber
+	 *
+	 * Constraint:
+	 *     value=INT
+	 */
+	protected void sequence_LiteralInteger(ISerializationContext context, LiteralNumber semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, IoTPackage.Literals.LITERAL_NUMBER__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, IoTPackage.Literals.LITERAL_NUMBER__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getLiteralIntegerAccess().getValueINTTerminalRuleCall_1_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Method returns Method
+	 *     Condition returns Method
+	 *     OrCondition returns Method
+	 *     OrCondition.OrCondition_1_0 returns Method
+	 *     AndCondition returns Method
+	 *     AndCondition.AndCondition_1_0 returns Method
+	 *     ComparisonCondition returns Method
+	 *     ComparisonCondition.ComparisonCondition_1_0 returns Method
+	 *     PrimaryCondition returns Method
+	 *     LiteralMethod returns Method
 	 *
 	 * Constraint:
 	 *     (name=ID (parameters+=ID parameters+=ID*)?)
 	 */
 	protected void sequence_Method(ISerializationContext context, Method semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Condition returns OrCondition
+	 *     OrCondition returns OrCondition
+	 *     OrCondition.OrCondition_1_0 returns OrCondition
+	 *     AndCondition returns OrCondition
+	 *     AndCondition.AndCondition_1_0 returns OrCondition
+	 *     ComparisonCondition returns OrCondition
+	 *     ComparisonCondition.ComparisonCondition_1_0 returns OrCondition
+	 *     PrimaryCondition returns OrCondition
+	 *
+	 * Constraint:
+	 *     (left=OrCondition_OrCondition_1_0 right=AndCondition)
+	 */
+	protected void sequence_OrCondition(ISerializationContext context, OrCondition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, IoTPackage.Literals.OR_CONDITION__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, IoTPackage.Literals.OR_CONDITION__LEFT));
+			if (transientValues.isValueTransient(semanticObject, IoTPackage.Literals.OR_CONDITION__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, IoTPackage.Literals.OR_CONDITION__RIGHT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getOrConditionAccess().getOrConditionLeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getOrConditionAccess().getRightAndConditionParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
 	}
 	
 	

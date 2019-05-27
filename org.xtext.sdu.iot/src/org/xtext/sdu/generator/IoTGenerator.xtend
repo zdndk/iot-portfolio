@@ -21,6 +21,13 @@ import org.xtext.sdu.ioT.SensorType
 import org.xtext.sdu.ioT.SensorTypes
 import org.xtext.sdu.ioT.Server
 import org.xtext.sdu.ioT.FetchDataExpression
+import org.xtext.sdu.ioT.Condition
+import org.xtext.sdu.ioT.OrCondition
+import org.xtext.sdu.ioT.AndCondition
+import org.xtext.sdu.ioT.ComparisonCondition
+import org.xtext.sdu.ioT.LiteralBool
+import org.xtext.sdu.ioT.Method
+import org.xtext.sdu.ioT.LiteralNumber
 
 /**
  * Generates code from your model files on save.
@@ -127,13 +134,40 @@ class IoTGenerator extends AbstractGenerator {
 	«server.name»_s = socket.socket()
 	«server.name»_s.connect(«server.name»_addr)
 	«server.name»_s.setblocking(True)
+	«IF fetchDataWithServer.triggered !== null»
 	while True:
-	   	time.sleep(«(fetchDataWithServer.conExp as FetchDataExpression).duration.time»)
+	   	time.sleep(«(fetchDataWithServer.triggered as FetchDataExpression).duration.time»)
 	   	«FOR getMethod : resource.allContents.filter(SensorGetMethod).filter[it.type == (fetchDataWithServer.filter as SensorType)].toIterable»
 	   	«server.name»_s.sendall((b'«scope.name»|{0}|'.format(«resource.allContents.filter(Sensor).filter[it.type == fetchDataWithServer.filter as SensorType].head.name».«getMethod.method.name»(«FOR param: getMethod.method.parameters SEPARATOR ','»«param»«ENDFOR»))))
 	   	«ENDFOR»
+	«ELSEIF fetchDataWithServer.condition !== null»
+	while True:
+		«FOR getMethod : resource.allContents.filter(SensorGetMethod).filter[it.type == (fetchDataWithServer.filter as SensorType)].toIterable»
+		«emitCondition(fetchDataWithServer, getMethod, scope, resource, server)»
+		«ENDFOR»
+		time.sleep(1)
+	«ENDIF»
 	«ENDFOR»
 	'''
+	
+	def emitCondition(FetchData fetchData, SensorGetMethod sensorGetMethod, Device scope, Resource resource, Server server)'''
+	if(«generateCondition(fetchData.condition.condition, resource, fetchData)»)
+		«server.name»_s.sendall((b'«scope.name»|{0}|'.format(«resource.allContents.filter(Sensor).filter[it.type == fetchData.filter as SensorType].head.name».«sensorGetMethod.method.name»(«FOR param: sensorGetMethod.method.parameters SEPARATOR ','»«param»«ENDFOR»))))
+	'''
+	
+	def String generateCondition(Condition con, Resource resource, FetchData fetchData) {
+		switch con {
+			OrCondition: con.left.generateCondition(resource, fetchData)+" || "+con.right.generateCondition(resource, fetchData)
+			AndCondition: con.left.generateCondition(resource, fetchData)+" && "+con.right.generateCondition(resource, fetchData)
+			ComparisonCondition: con.left.generateCondition(resource, fetchData)+" " + con.operator + " " +con.right.generateCondition(resource, fetchData)
+			LiteralBool: con.value
+			LiteralNumber: Integer.toString(con.value)
+			Method: emitMethod(con, resource, fetchData)
+			default: throw new Error(con.toString)
+		}
+	}
+	
+	def String emitMethod(Method method, Resource resource, FetchData fetchData) '''«val sgm = resource.allContents.filter(SensorGetMethod).filter[it.method.name == method.name].head.type»«resource.allContents.filter(Sensor).filter[it.type == sgm].head.name».«method.name»(«FOR param: method.parameters SEPARATOR ','»«param»«ENDFOR»)'''
 	
 	
 	def emitSensorGetMethod(Resource resourceRoot) 

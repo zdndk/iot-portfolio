@@ -195,6 +195,15 @@ public interface IoTFactory extends EFactory
   FetchDataCondition createFetchDataCondition();
 
   /**
+   * Returns a new object of class '<em>Condition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Condition</em>'.
+   * @generated
+   */
+  Condition createCondition();
+
+  /**
    * Returns a new object of class '<em>Ip</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -220,6 +229,51 @@ public interface IoTFactory extends EFactory
    * @generated
    */
   Time createTime();
+
+  /**
+   * Returns a new object of class '<em>Or Condition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Or Condition</em>'.
+   * @generated
+   */
+  OrCondition createOrCondition();
+
+  /**
+   * Returns a new object of class '<em>And Condition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>And Condition</em>'.
+   * @generated
+   */
+  AndCondition createAndCondition();
+
+  /**
+   * Returns a new object of class '<em>Comparison Condition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Comparison Condition</em>'.
+   * @generated
+   */
+  ComparisonCondition createComparisonCondition();
+
+  /**
+   * Returns a new object of class '<em>Literal Bool</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Literal Bool</em>'.
+   * @generated
+   */
+  LiteralBool createLiteralBool();
+
+  /**
+   * Returns a new object of class '<em>Literal Number</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Literal Number</em>'.
+   * @generated
+   */
+  LiteralNumber createLiteralNumber();
 
   /**
    * Returns the package supported by this factory.
